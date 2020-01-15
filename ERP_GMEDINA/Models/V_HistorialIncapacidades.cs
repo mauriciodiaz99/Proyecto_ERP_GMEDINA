@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Models
     
     public partial class V_HistorialIncapacidades
     {
+        public int emp_Id { get; set; }
         public int hinc_Id { get; set; }
         public string NombreCompleto { get; set; }
         public int ticn_Id { get; set; }
@@ -26,6 +27,5 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
         public bool hinc_Estado { get; set; }
         public string hinc_RazonInactivo { get; set; }
-        public int emp_Id { get; set; }
     }
 }

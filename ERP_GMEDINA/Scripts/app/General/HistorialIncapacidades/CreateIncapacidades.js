@@ -3,6 +3,24 @@
     $("#MeterId").find("#emp_idd").val(id)
 
 
+    function Fecha() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        return today = yyyy + '-' + mm + '-' + dd;
+    }
+
+    $("#hinc_FechaInicio").attr("min", Fecha());
+    $("#hinc_FechaFin").attr("min", Fecha());
+
+
     $("#btnGuardar").click(function () {
         debugger
     var data = $("#FormNuevo").serializeArray();
@@ -25,7 +43,7 @@
     }
     });
 
-    debugger
+    
     
     _ajax({ ID: parseInt(id) },
             '/HistorialIncapacidades/Detallesempleados/',
