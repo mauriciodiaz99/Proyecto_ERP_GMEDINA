@@ -333,16 +333,15 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public JsonResult Contratar(tbEmpleados tbEmpleados)
+        public JsonResult Contratar(tbSeleccionCandidatos tbSeleccionCandidatos, tbEmpleados tbEmpleados, tbSueldos tbSueldos, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
             if (tbEmpleados.car_Id != 0)
             {
-                int scan_id = (int)Session["scan_id"];
-                int per_id = (int)Session["per_id"];
                 var usuario = (tbUsuario)Session["Usuario"];
 
-                var empleados = db.tbEmpleados.Where(x => x.per_Id == per_id)
+                //Comprueba si el candidato ah sido empleado antes.
+                var empleados = db.tbEmpleados.Where(x => x.per_Id == tbEmpleados.per_Id)
                .Select(
                t => new
                {
@@ -351,9 +350,10 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
+                    //Si el candidato nunca ah sido empleado se contratara
                     if (empleados.Count == 0)
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Contratar(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, false, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
@@ -363,7 +363,8 @@ namespace ERP_GMEDINA.Controllers
                     }
                     else
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        //Si el candidato ah sido empleado se recontratara
+                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, true, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
 

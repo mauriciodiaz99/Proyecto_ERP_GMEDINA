@@ -12,11 +12,9 @@ function llenarDropDownList() {
        '/SeleccionCandidatos/llenarDropDowlistTipoMonedas',
        'POST',
        function (result) {
-           debugger
            $.each(result, function (id, Lista) {
 
                Lista.forEach(function (value, index) {
-                   debugger
                    var x = document.getElementById("tmon_Id");
                    var option = document.createElement("option");
                    option.text = value.Descripcion;
@@ -30,7 +28,6 @@ function llenarDropDownList() {
    '/SeleccionCandidatos/llenarDropDowlistRequisicion',
    'POST',
    function (result) {
-       debugger
        $.each(result, function (id, Lista) {
            Lista.forEach(function (value, index) {
                var x = document.getElementById("req_Id");
@@ -43,8 +40,18 @@ function llenarDropDownList() {
    });
 }
 
-$("#btnCrear").click(function () {
+$("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
+    debugger
+    try
+    {
+
+    
+        var tbSeleccionCandidatos =
+    {
+        scan_Id: sessionStorage.getItem("scan_Id"),
+    };
+
     var tbEmpleados =
         {
             per_id:     sessionStorage.getItem("per_Id"),
@@ -58,64 +65,39 @@ $("#btnCrear").click(function () {
             emp_Fechaingreso: $("#emp_Fechaingreso").val(),
         };
 
-    var tbSuelos =
+    var tbSueldos =
         {
-            suc_Cantidad: $("#sue_Cantidad").val(),
-            tam_Id: document.getElementById("tam_Id").value,
-            tbCargos: { car_Descripcion: $("#car_Descripcion").val() },
+            sue_Cantidad: $("#sue_Cantidad").val(),
+            tmon_Id: document.getElementById("tmon_Id").value,
         };
     var tbRequisiciones =
         {
-            suc_Id: $("#Sucursales").val(),
-            area_Descripcion: $("#area_Descripcion").val(),
-            tbCargos: { car_Descripcion: $("#car_Descripcion").val() },
+            req_Id: $("#req_Id").val(),
+
         };
-
-    if (tbAreas != null) {
-        data = JSON.stringify({
-            tbAreas: tbAreas,
-            tbDepartamentos: lista
-        });
-        _ajax(data,
-            '/Areas/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                    ChildTable.clear().draw();
-                    $("#FormAreas").find("#suc_Id option[value='0']").attr("selected", true);
-                    $("#FormAreas").find("#area_Descripcion").val("");
-                    $("#FormAreas").find("#car_Descripcion").val("");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
     }
-});
+    catch(Exception)
+    {
 
-$("#btnContratar").click(function () {
-    var data = $("#FormContratar").serializeArray();
-    data = serializar(data);
-
-    if (data != null) {
-        data = JSON.stringify({ tbEmpleados: data });
+    }
+    if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
+        tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && emp_CuentaBancaria.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
+        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.suc_Cantidad != "" && tbRequisiciones.req_Id != null) {
+        data = JSON.stringify({
+            tbSeleccionCandidatos: tbSeleccionCandidatos,
+            tbEmpleados: tbEmpleados,
+            tbSueldos: tbSueldos,
+            tbRequisiciones: tbRequisiciones
+        });
         _ajax(data,
             '/SeleccionCandidatos/Contratar',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalContratar").modal('hide');//ocultamos el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal 
-                    llenarTabla();
-                    LimpiarControles(["emp_FechaInreso", "emp_CuentaBancaria"]);
-                    MsgSuccess("¡Éxito!", "Se ha guardado el cambio");
-                } else {
+                    MsgSuccess("¡Exito!", "Se ah contratado el candidato");
 
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
