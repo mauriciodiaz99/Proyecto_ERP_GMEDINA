@@ -256,31 +256,3 @@ function CallContratar(btn) {
     debugger
     $(location).attr('href', "/SeleccionCandidatos/Contratar/" + row.data().ID);
 }
-
-
-$("#btnContratar").click(function () {
-    var data = $("#FormContratar").serializeArray();
-    data = serializar(data);
-
-    if (data != null) {
-        data = JSON.stringify({ tbEmpleados: data });
-        _ajax(data,
-            '/SeleccionCandidatos/Contratar',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalContratar").modal('hide');//ocultamos el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal 
-                    llenarTabla();
-                    LimpiarControles(["emp_FechaInreso", "emp_CuentaBancaria"]);
-                    MsgSuccess("¡Éxito!", "Se ha guardado el cambio");
-                } else {
-
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
-});

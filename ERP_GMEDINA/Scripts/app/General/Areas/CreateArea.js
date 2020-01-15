@@ -151,6 +151,7 @@ var lista = getJson();
           tbAreas: tbAreas,
           tbDepartamentos: lista
          });
+        debugger
          _ajax(data,
              '/Areas/Create',
              'POST',
