@@ -224,6 +224,12 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
+    <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs" />
+    <Compile Include="DataSets\ReportesPlanillaDS1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1339,6 +1345,17 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSets\ReportesPlanillaDS.xsc">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReportesPlanillaDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlanillaDS1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\ReportesPlanillaDS.xss">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
