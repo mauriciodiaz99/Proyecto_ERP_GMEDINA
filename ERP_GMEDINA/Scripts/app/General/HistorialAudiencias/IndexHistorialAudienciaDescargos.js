@@ -2,28 +2,41 @@
     var div = '<div class="ibox"><div class="ibox-title"><h5>Audiencias de Descargo</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')">Registrar</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
-        + '<tr> <th>  Motivo  </th>'
+        + '<tr> <th>  Numero  </th>'
+       + '<th>Motivo</th>'
         + '<th>Fecha</th>'
         + '<th>Testigo</th> '
+         + '<th>Estado</th> '
          + '<th>Acciones</th> '
         + '</tr> </thead> ';
     obj.forEach(function (index, value) {
+        //var mostrarboton = index.hinc_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>';
+        //if (value.hinc_Estado > fill) {
+
         var testigo = "";
         if (index.aude_Testigo == false)
             testigo = "No";
         else
             testigo = "Si";
+
+        var estado = "";
+        if (index.aude_Estado == false)
+            estado = "Inactivo";
+        else
+            estado = "Activo";
+
         div = div +
             '<tbody>' + '<tr>'
+             + '<td>' + index.aude_Id + '</td>'
                 + '<td>' + index.aude_Descripcion + '</td>'
                 + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
                 + '<td>' + testigo + '</td>'
-               
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+               + '<td>' + estado + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button> <button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>'
                 + '</tr>' + '</tbody>'
         '</table>'
 
-
+//}
     });
     return div + '</div></div>';
 }
@@ -149,6 +162,13 @@ function Llamarmodaldelete(ID) {
     modalnuevo.modal('show');
 }
 
+function Llamarmodalhabilitar(ID) {
+
+    var modalnuevo = $("#ModalHabilitar");
+    $("#ModalHabilitar").find("#aude_Id").val(ID);
+    modalnuevo.modal('show');
+}
+
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
@@ -225,3 +245,29 @@ function Fecha() {
     }
     return today = yyyy + '-' + mm + '-' + dd;
 }
+
+
+
+$("#btnActivar").click(function () {
+    var data = $("#FormActivar").serializeArray();
+    data = serializar(data);
+    debugger
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
+        _ajax(data,
+            '/HistorialAudienciaDescargos/habilitar/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["hinc_Id"]);
+                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});

@@ -22,11 +22,16 @@ namespace ERP_GMEDINA.Controllers
 
         var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
             return View(tbHistorialIncapacidades.ToList());
-          
+
+            //bool Admin = (bool)Session["Admin"];
+            //tbHistorialIncapacidades tbHistorialIncapacidades = new tbHistorialIncapacidades { hinc_Estado = true };
+            //return View(tbHistorialIncapacidades);
+
+
         }
 
 
-       
+
         public ActionResult Create()
         {
             ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
@@ -106,7 +111,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id & x.hinc_Estado == true).ToList();
+                    lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id ).ToList();
 
                 }
                 catch
@@ -387,6 +392,37 @@ namespace ERP_GMEDINA.Controllers
         //    db.SaveChanges();
         //    return RedirectToAction("Index");
         //}
+
+
+
+
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialIncapacidades tbHistorialIncapacidades)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Restore(tbHistorialIncapacidades.hinc_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialIncapacidades_Restore_Result1 item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -1,4 +1,10 @@
 ﻿
+var fill = 0;
+
+$(document).ready(function () {
+    //fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
 
 function format(obj) {
 
@@ -7,34 +13,41 @@ function format(obj) {
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Incapacidad  </th>'
+        + '<th>Número</th>'
         + '<th>Dias de retiro</th>'
         + '<th>Centro Medico</th> '
          + '<th>Diagnostico</th> '
          + '<th>Fecha Inicio</th> '
          + '<th>Fecha Fin</th> '
+         + '<th>Estado</th> '
          + '<th>Acciones</th> '
         + '</tr> </thead> ';
     obj.forEach(function (index, value) {
-        div = div +
-            '<tbody>' + '<tr>'
-                + '<td>' + index.ticn_Descripcion + '</td>'
-                + '<td>' + index.hinc_Dias + '</td>'
-                + '<td>' + index.hinc_CentroMedico + '</td>'
-                + '<td>' + index.hinc_Diagnostico + '</td>'
-                + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
-                + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
-                + '</tr>' + '</tbody>'
-        '</table>'
+        //var mostrarboton = index.hinc_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>';
+        //if (value.hinc_Estado > fill) {
+        var Estado = "";
+        if (index.hinc_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
+            div = div +
+                '<tbody>' + '<tr>'
+                    + '<td>' + index.hinc_Id + '</td>'
+                    + '<td>' + index.ticn_Descripcion + '</td>'
+                    + '<td>' + index.hinc_Dias + '</td>'
+                    + '<td>' + index.hinc_CentroMedico + '</td>'
+                    + '<td>' + index.hinc_Diagnostico + '</td>'
+                    + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
+                    + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
+                    + '<td>' + Estado + '</td>'
+                    + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>'+'</td>'
+                    + '</tr>' + '</tbody>'
+            '</table>'
 
-
+        //}
     });
     return div + '</div></div>';
 }
-
-
-
-
 
 
 
@@ -62,9 +75,7 @@ function llenarTabla() {
 }
 
 
-$(document).ready(function () {
-    llenarTabla();
-});
+
 
 var idEmpleado = 0;
 
@@ -239,3 +250,78 @@ $("#InActivar").click(function () {
 
 
 
+
+Admin = true;
+
+
+function Llamarmodalhabilitar(ID) {
+
+    var modalhabilitar = $("#ModalHabilitar");
+    Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
+    modalhabilitar.modal('show');
+   
+
+}
+
+
+
+//Esta funcion llama al modal de Habilitar
+//function hablilitar(btn) {
+//    var tr = $(btn).closest('tr');
+//    var row = tabla.row(tr);
+//    var id = row.data().ID;
+//    $("#txtIdRestore").val(id);
+//    $('#ModalHabilitar').modal('show');
+//}
+
+//Cambiar el controlador para ejecutar el UDP de restaurar
+
+
+
+
+//$("#btnActivar").click(function () {
+   
+//    debugger
+//    var data = $("#FormActivar").serializeArray();
+//    data = serializar(data);
+//    _ajax(JSON.stringify({ id: data }), // <<<<<<===================================
+//        '/HistorialIncapacidades/habilitar/',
+//        'POST',
+//        function (obj) {
+//            if (obj != "-1" && obj != "-2" && obj != "-3") {
+//                MsgWarning("¡Exito!", "Se ah Activado el registro");
+//                llenarTabla(-1);
+//            }
+//          else {
+//          MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+//}
+//        });
+
+
+//});
+
+
+
+$("#btnActivar").click(function () {
+    var data = $("#FormActivar").serializeArray();
+    data = serializar(data);
+    debugger
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialIncapacidades: data });
+        _ajax(data,
+            '/HistorialIncapacidades/habilitar/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["hinc_Id"]);
+                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});

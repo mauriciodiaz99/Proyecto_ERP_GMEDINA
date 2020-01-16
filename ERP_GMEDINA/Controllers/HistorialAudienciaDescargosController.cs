@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialAudienciaDescargo.Where(x => x.emp_Id == id & x.aude_Estado == true).ToList();
+                    lista = db.V_HistorialAudienciaDescargo.Where(x => x.emp_Id == id ).ToList();
 
                 }
                 catch
@@ -68,6 +68,33 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore1(tbHistorialAudienciaDescargo.aude_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Restore1_Result1 item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public JsonResult Create(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {

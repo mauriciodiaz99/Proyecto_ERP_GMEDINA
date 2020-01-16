@@ -933,6 +933,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
         </Function>
         <Function Name="UDP_RRHH_tbEmpresas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_Logo" Type="nvarchar" Mode="In" />
           <Parameter Name="empr_usuarioCrea" Type="int" Mode="In" />
           <Parameter Name="empr_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -1042,6 +1043,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="aude_DireccionArchivo" Type="nvarchar" Mode="In" />
           <Parameter Name="aude_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="aude_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="aude_Id" Type="int" Mode="In" />
+          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="aude_Id" Type="int" Mode="In" />
@@ -1970,6 +1976,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(String)">
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_Logo" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2403,7 +2410,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <Parameter Name="hinc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result1)">
             <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
             <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
@@ -2552,6 +2559,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
             <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Restore1_Result1)">
+            <Parameter Name="aude_Id" Mode="In" Type="Int32" />
+            <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -3440,6 +3452,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Restore_Result1">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore1_Result1">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3796,8 +3817,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Restore" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result1">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -4090,6 +4111,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Restore1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Restore" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Restore1_Result1">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
