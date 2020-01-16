@@ -1,34 +1,42 @@
-﻿
-
+﻿var fill = 0;
 
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Registrar vacación</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                
+                '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Fecha inicio' + '</th>' +
                 '<th>' + 'Fecha fin' + '</th>' +
                 '<th>' + 'Cantidad dias' + '</th>' +
                 '<th>' + 'Mes vacaciones' + '</th>' +
                 '<th>' + 'Año vacaciones' + '</th>' +
+                '<th>' + 'Estado' + '</th>' +
                 '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
-        div = div +
-                '<tbody>' +
-                '<tr>' +
-                
-                '<td>' + FechaFormato(index.hvac_FechaInicio).substring(0, 10) + '</td>' +
-                '<td>' + FechaFormato(index.hvac_FechaFin).substring(0, 10) + '</td>' +
-                '<td>' + index.hvac_CantDias + '</td>' +
-                '<td>' + index.hvac_MesVacaciones + '</td>' +
-                '<td>' + index.hvac_AnioVacaciones + '</td>' +
-                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalles</button>' + '</td>' +
-                '</tr>' +
-                '</tbody>'
-        '</table>'
-
+        //var MostrarBoton = index.hvac_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
+        //if (value.hvac_Estado > fill) {
+            var estado = "";
+            if (index.hvac_Estado == false)
+                estado = "Inactivo";
+            else
+                estado = "Activo";
+            div = div +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + index.hvac_Id + '</td>' +
+                    '<td>' + FechaFormato(index.hvac_FechaInicio).substring(0, 10) + '</td>' +
+                    '<td>' + FechaFormato(index.hvac_FechaFin).substring(0, 10) + '</td>' +
+                    '<td>' + index.hvac_CantDias + '</td>' +
+                    '<td>' + index.hvac_MesVacaciones + '</td>' +
+                    '<td>' + index.hvac_AnioVacaciones + '</td>' +
+                    '<td>' + estado + '</td>' +
+                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalles</button> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Habilitar</button>' + '</td>' +
+                    '</tr>' +
+                    '</tbody>'
+            '</table>'
+        //}
     });
     return div + '</div></div>';
 }
@@ -51,6 +59,7 @@ function llenarTabla() {
        });
 }
 $(document).ready(function () {
+ //   fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 var IdEmpleado = 0;
@@ -131,7 +140,7 @@ function llamarmodaldetalles(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    
+
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
@@ -167,7 +176,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -178,4 +187,36 @@ $("#btnGuardar").click(function () {
 });
 
 
+function llamarmodalhabilitar(ID) {
+    var ModalHabi = $("#ModalHabilitar");
+    $("#ModalHabilitar").find("#hvac_Id").val(ID);
+    ModalHabi.modal('show');
+}
 
+
+
+
+
+$("#btnActivar").click(function () {
+    var data = $("#FormActivar").serializeArray();
+        data = serializar(data);
+        debugger
+        if (data != null) {
+            data = JSON.stringify({ tbHistorialVacaciones: data });
+            _ajax(data,
+                '/HistorialVacaciones/habilitar/',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        LimpiarControles(["hvac_Id"]);
+                        MsgWarning("¡Exito!", "Se ha activado el registro");
+                    } else {
+                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    }
+                });
+        } else {
+            MsgError("Error", "por favor llene todas las cajas de texto");
+        }
+    });

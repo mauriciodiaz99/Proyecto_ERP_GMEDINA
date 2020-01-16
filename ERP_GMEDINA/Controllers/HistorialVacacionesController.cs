@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialVacaciones
         public ActionResult Index()
         {
+            //bool Admin = (bool)Session["Admin"];
             var tbHistorialVacaciones = db.tbHistorialVacaciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
             return View(tbHistorialVacaciones.ToList());
         }
@@ -54,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id && x.hvac_Estado == true).ToList();
+                    lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id).ToList();
                     if(lista == null)
                     {
                         lista.Add(new V_Historialvacaciones {  });
@@ -270,13 +271,42 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+
+
+        [HttpPost]
+        public ActionResult habilitar(tbHistorialVacaciones tbHistorialVacaciones)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialVacaciones_Restore(tbHistorialVacaciones.hvac_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialVacaciones_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
+
     }
 }
