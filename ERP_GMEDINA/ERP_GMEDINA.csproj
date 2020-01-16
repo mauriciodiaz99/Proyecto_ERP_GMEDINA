@@ -645,6 +645,7 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\AdminHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\Planilla.js" />

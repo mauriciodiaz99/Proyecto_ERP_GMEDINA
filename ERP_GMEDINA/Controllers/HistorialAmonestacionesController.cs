@@ -17,7 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         public ActionResult Index()
         {
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion"); 
+            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
+            //bool Admin = (bool)Session["Admin"];
             var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbHistorialAmonestaciones);
         }
@@ -53,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id && x.hamo_Estado == true).ToList();
+                    lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id).ToList();
                 }
                 catch
                 {
@@ -174,6 +175,30 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialAmonestaciones tbHistorialAmonestaciones)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Restore(tbHistorialAmonestaciones.hamo_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAmonestaciones_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult DeleteConfirmed(int id)
         {
             tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
@@ -184,11 +209,12 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
+
     }
 }

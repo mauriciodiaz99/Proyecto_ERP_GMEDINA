@@ -1,24 +1,37 @@
-﻿function format(obj) {
+﻿var fill = 0;
+function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" data-id="@item.cin_IdIngreso">Audiecia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
+                '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Tipo Amonestacion' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
                 '<th>' + 'Obsevarcion' + '</th>' +
+                 '<th>' + 'Estado' + '</th>' +
                 '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
+        var Estado = "";
+        if (index.hamo_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
+        //var MostrarBoton = index.hamo_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
+        //if (value.hamo_Estado > fill) {
             div = div +
                     '<tbody>' +
                     '<tr>' +
+                    '<td>' + index.hamo_Id + '</td>' +
                     '<td>' + index.tamo_Descripcion + '</td>' +
                     '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
                     '<td>' + index.hamo_Observacion + '</td>' +
-                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
+                    '<td>' + Estado + '</td>' +
+                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button><button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>' + '</td>' +
                     '</tr>' +
                     '</tbody>'
             '</table>'
+        //}
     });
     return div + '</div></div>';
 }
@@ -41,6 +54,7 @@ function llenarTabla() {
        });
 }
 $(document).ready(function () {
+//    fill = Admin = undefined ? 0 : -1;
     llenarTabla();
 });
 var IdEmpleado = 0;
@@ -111,7 +125,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id", "hamo_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -137,7 +151,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -146,6 +160,33 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+//--------------------Habilitar--------------------------
+function llamarmodalhabilitar(ID) {
+    var modalhabilitar = $("#ModalHabilitar");
+    $("#ModalHabilitar").find("#hamo_Id").val(ID);
+    modalhabilitar.modal('show');
+}
 
-
+$("#btnActivar").click(function () {
+    var data = $("#FormActivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialAmonestaciones: data });
+        _ajax(data,
+            '/HistorialAmonestaciones/habilitar/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["txtIdRestore"]);
+                    MsgWarning("¡Exito!", "Se ha activado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 

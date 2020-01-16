@@ -2449,9 +2449,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' doe
         <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
         <EntityType Name="tbUsuario">
           <Key>
             <PropertyRef Name="usu_Id" />
@@ -2967,6 +2964,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' doe
           <Property Name="hamo_UsuarioModifica" Type="Int32" />
           <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
