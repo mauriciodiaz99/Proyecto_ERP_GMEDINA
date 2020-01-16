@@ -14,7 +14,8 @@ function llenarTabla() {
                    Nombre: value.Nombre,
                    Fase: value.Fase,
                    Plaza_Solicitada: value.Plaza_Solicitada,
-                   Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8)
+                   Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
+                   per_Id: value.per_Id
                });
            });
            tabla.draw();
@@ -97,9 +98,9 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
+                    MsgSuccess("¡Éxito!", "Se ha actualizado el registro");
                 } else {
-                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
@@ -151,9 +152,10 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+
+                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
                 } else {
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
@@ -170,15 +172,15 @@ function CallEliminar(btn) {
     var id = row.data().ID;
 
     CierraPopups();
-    $("#ModalInactivar").find("#scan_Id").val(id);
+    $("#ModalInhabilitar").find("#scan_Id").val(id);
     _ajax(null,
         '/SeleccionCandidatos/Edit/' + id,
        'GET',
        function (obj) {
            if (obj != "-1" && obj != "-2" && obj != "-3") {
-               $("#ModalInactivar").find("#per_Id").val(obj.per_Id);
-               $("#ModalInactivar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-               $('#ModalInactivar').modal('show');
+               $("#ModalInhabilitar").find("#per_Id").val(obj.per_Id);
+               $("#ModalInhabilitar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+               $('#ModalInhabilitar').modal('show');
            }
        });
 
@@ -200,9 +202,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
                 } else {
-                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
             });
     } else {
@@ -242,48 +244,16 @@ $("#btnEditar").click(function () {
 
 //EMPLEADO 
 function CallContratar(btn) {
+    debugger
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
-    var id = row.data().ID;
-    ;
-    _ajax(null,
-        '/SeleccionCandidatos/Contratar/' + id,
-        'GET',
-        function (obj) {
-            $("#ModalContratar").find("#Candidato").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-
-        });
-
-    $('#ModalContratar').modal('show');
-
-
-
+    var scan_Id = row.data().ID;
+    var per_id = row.data().per_Id;
+    var Identidad = row.data().Identidad;
+    var Nombre = row.data().Nombre;
+    sessionStorage.setItem("scan_Id", scan_Id);
+    sessionStorage.setItem("per_Id", per_id);
+    sessionStorage.setItem("per_Descripcion", Identidad + " - " + Nombre);
+    
+    $(location).attr('href', "/SeleccionCandidatos/Contratar/" + scan_Id);
 }
-
-
-$("#btnContratar").click(function () {
-    var data = $("#FormContratar").serializeArray();
-    data = serializar(data);
-
-    if (data != null) {
-        data = JSON.stringify({ tbEmpleados: data });
-        _ajax(data,
-            '/SeleccionCandidatos/Contratar',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalContratar").modal('hide');//ocultamos el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal 
-                    llenarTabla();
-                    LimpiarControles(["emp_FechaInreso", "emp_CuentaBancaria"]);
-                    MsgSuccess("¡Éxito!", "Se ha guardado el cambio");
-                } else {
-
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
-});

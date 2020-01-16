@@ -716,6 +716,9 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ContratarCandidato").Include(
+                "~/Scripts/app/General/SeleccionCandidatos/ContratarCandidato.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
                  "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
 
