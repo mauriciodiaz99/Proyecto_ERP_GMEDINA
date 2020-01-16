@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="60.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRolesUsuario" Width="1.5" PointX="8.25" PointY="80.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="86.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAreas" Width="1.5" PointX="5.25" PointY="87.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3" PointY="69.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCompetencias" Width="1.5" PointX="3" PointY="73.625" IsExpanded="true" />

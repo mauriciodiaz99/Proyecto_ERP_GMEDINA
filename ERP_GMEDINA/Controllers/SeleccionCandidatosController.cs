@@ -355,7 +355,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, false,tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -374,7 +374,7 @@ namespace ERP_GMEDINA.Controllers
                         }
                     }
 
-                    Session.Remove("id");
+                    //Session.Remove("id");
                 }
                 catch (Exception ex)
                 {
