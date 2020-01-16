@@ -50,7 +50,7 @@ namespace ERP_GMEDINA.Controllers
             //CARGAR DDL DE SELECCION CANDIDATOS
             ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento.Where(x => x.fare_Estado), "fare_Id", "fare_Descripcion");
             ViewBag.per_Id = new SelectList(personasddl, "per_Id", "per_descripcion");
-            ViewBag.req_Id = new SelectList(db.tbRequisiciones.Where(x => x.req_Estado), "req_Id", "req_Descripcion");
+            ViewBag.req_Id = new SelectList(db.tbRequisiciones.Where(x => x.req_Estado).Where(x => Convert.ToInt32(x.req_Vacantes) < x.req_EdadMinima), "req_Id", "req_Descripcion");
 
 
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
