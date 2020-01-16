@@ -487,6 +487,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(
                 "~/Scripts/app/General/HistorialPermisos/IndexHistorialPermisos.js"));
 
+            //App/HistorialPermisos
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos/Admin").Include(
+                "~/Scripts/app/General/HistorialPermisos/Admin.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialPermisos").Include(
             "~/Scripts/app/general/HistorialPermisos/CreateHistorialPermisos.js"));
             //OPTIMIZATION

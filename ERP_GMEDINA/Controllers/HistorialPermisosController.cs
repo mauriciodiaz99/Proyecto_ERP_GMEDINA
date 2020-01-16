@@ -18,8 +18,10 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             //ViewBag.tsal_Id = new SelectList(db.tbTipoSalidas, "tsal_Id", "tsal_Descripcion");
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialPermisos = new List<tbHistorialPermisos> { };
+            bool Admin = (bool)Session["Admin"];
+            //Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos { hper_Estado = true };
+            //var tbHistorialSalidas = new List<tbHistorialSalidas> { };
             return View(tbHistorialPermisos);
         }
         public ActionResult llenarTabla()
@@ -62,6 +64,31 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialPermisos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
