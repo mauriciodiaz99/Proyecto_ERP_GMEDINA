@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Controllers
 
 
             //CARGAR DDL DE EMPLEADOS
-            ViewBag.emp_Id = new SelectList(empleadosddl, "emp_Id", "emp_descripcion");
+                    ViewBag.emp_Id = new SelectList(empleadosddl, "emp_Id", "emp_descripcion");
                     ViewBag.car_Id = new SelectList(db.tbCargos.Where(x => x.car_Estado), "car_Id", "car_Descripcion");
                     ViewBag.area_Id = new SelectList(db.tbAreas.Where(x => x.area_Estado), "area_Id", "area_Descripcion");
                     ViewBag.depto_Id = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado), "depto_Id", "depto_Descripcion");
@@ -99,28 +99,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult llenarDropDowlistTipoMonedas()
-        {
-            var Monedas = new List<object> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-
-                    Monedas.AddRange(db.tbTipoMonedas
-                    .Select(tabla => new { Id = tabla.tmon_Id, Descripcion = tabla.tmon_Descripcion, Estado = tabla.tmon_Estado })
-                    .Where(x => x.Estado).ToList());
-                }
-                catch
-                {
-                    return Json("-2", 0);
-                }
-
-            }
-            var result = new Dictionary<string, object>();
-            result.Add("Monedas", Monedas);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
         public ActionResult llenarDropDowlistRequisicion()
         {
             var Requisicion = new List<object> { };
@@ -128,10 +106,20 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    var requisicionesddl = db.tbRequisiciones.Where(x => x.req_Estado)
+                        .Select(
+                        t => new
+                        {
+                            req_Id = t.req_Id,
+                            req_Descripcion = t.req_Descripcion,
+                            req_Vacantes = t.req_Vacantes,
+                            req_VacantesOcupadas = t.req_VacantesOcupadas,
+                            req_Estado = t.req_Estado
+                        }).ToList();
 
-                    Requisicion.AddRange(db.tbRequisiciones
-                    .Select(tabla => new { Id = tabla.req_Id, Descripcion = tabla.req_Descripcion, Estado = tabla.req_Estado, tabla.req_Vacantes })
-                    .Where(x => x.Estado).ToList());
+                    Requisicion.AddRange(requisicionesddl
+                    .Select(tabla => new { Id = tabla.req_Id, Descripcion = tabla.req_Descripcion, Estado = tabla.req_Estado, tabla.req_Vacantes, tabla.req_VacantesOcupadas })
+                    .Where(x => x.Estado).Where(x => Convert.ToInt32(x.req_Vacantes) > x.req_VacantesOcupadas).ToList());
                 }
                 catch
                 {
@@ -172,29 +160,32 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        public JsonResult Create(tbEmpleados tbEmpleados)
+        public JsonResult PromoverGuardar(tbEmpleados tbEmpleados, tbSueldos tbSueldos, tbRequisiciones tbRequisiciones)
         {
             string msj = "";
-            try
+            if (tbEmpleados.car_Id != 0)
             {
-                var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id,
-                                                                tbEmpleados.car_Id,
-                                                                tbEmpleados.area_Id,
-                                                                tbEmpleados.depto_Id,
-                                                                tbEmpleados.jor_Id,
-                                                                Convert.ToDecimal(tbEmpleados.emp_CuentaBancaria),
-                                                                tbEmpleados.emp_Fechaingreso,
-                                                                1,
-                                                                DateTime.Now);
-                foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
+                var usuario = (tbUsuario)Session["Usuario"];
+
+
+                try
                 {
-                    msj = item.MensajeError + " ";
+                        var list = db.UDP_RRHH_tbHistorialCargos_Insert(tbEmpleados.emp_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        tbEmpleados.jor_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, tbRequisiciones.req_Id, 1, DateTime.Now);
+                        foreach (UDP_RRHH_tbHistorialCargos_Insert_Result item in list)
+                        {
+                            msj = item.MensajeError + " ";
+                        }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
+                msj = "-3";
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }

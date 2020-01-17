@@ -8,21 +8,6 @@
 function llenarDropDownList() {
 
 
-    _ajax(null,
-       '/HistorialCargos/llenarDropDowlistTipoMonedas',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-
-               Lista.forEach(function (value, index) {
-                   var x = document.getElementById("tmon_Id");
-                   var option = document.createElement("option");
-                   option.text = value.Descripcion;
-                   option.value = value.Id;
-                   x.add(option);
-               });
-           });
-       });
 
     _ajax(null,
    '/HistorialCargos/llenarDropDowlistRequisicion',
@@ -45,19 +30,17 @@ function llenarDropDownList() {
 
 $("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    debugger
+    
     try
     {
 
     var tbEmpleados =
         {
-            per_id:     document.getElementById("emep_Id"),
+            emp_Id:     document.getElementById("emp_Id").value,
             car_Id:     document.getElementById("car_Id").value,
             area_Id:    document.getElementById("area_Id").value,
             depto_Id:   document.getElementById("depto_Id").value,
             jor_Id:     document.getElementById("jor_Id").value,
-            cpla_IdPlanilla: document.getElementById("cpla_IdPlanilla").value,
-            fpa_IdFormaPago: document.getElementById("fpa_IdFormaPago").value,
             emp_CuentaBancaria: $("#emp_CuentaBancaria").val(),
             emp_Fechaingreso: $("#emp_Fechaingreso").val(),
         };
@@ -65,7 +48,6 @@ $("#btnGuardar").click(function () {
     var tbSueldos =
         {
             sue_Cantidad: $("#sue_Cantidad").val(),
-            tmon_Id: document.getElementById("tmon_Id").value,
         };
     var tbRequisiciones =
         {
@@ -78,16 +60,15 @@ $("#btnGuardar").click(function () {
 
     }
     if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
-        tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && emp_CuentaBancaria.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
-        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.suc_Cantidad != "" && tbRequisiciones.req_Id != null) {
+        tbEmpleados.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
+        tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
         data = JSON.stringify({
-            tbSeleccionCandidatos: tbSeleccionCandidatos,
             tbEmpleados: tbEmpleados,
             tbSueldos: tbSueldos,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,
-            '/HistorialCargos/Promover',
+            '/HistorialCargos/PromoverGuardar',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {

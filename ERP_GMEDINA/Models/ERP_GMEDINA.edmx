@@ -847,8 +847,8 @@
           <Property Name="treq_UsuarioModifica" Type="int" />
           <Property Name="treq_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Datos_Empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Datos_Empleado">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -869,8 +869,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosProfesionales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_DatosProfesionales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_DatosProfesionales">
           <Key>
             <PropertyRef Name="TipoDato" />
@@ -880,8 +880,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosProfesionales' does not ha
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Data_Id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosProfesionalesP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_DatosProfesionalesP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_DatosProfesionalesP">
           <Key>
             <PropertyRef Name="TipoDato" />
@@ -891,8 +891,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosProfesionalesP' does not h
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Data_Id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosRequisicion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_DatosRequisicion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_DatosRequisicion">
           <Key>
             <PropertyRef Name="TipoDato" />
@@ -904,8 +904,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_DatosRequisicion' does not have
           <Property Name="Data_Id" Type="int" Nullable="false" />
           <Property Name="req_Id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Departamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Departamentos">
           <Key>
             <PropertyRef Name="depto_Id" />
@@ -931,8 +931,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoAmonestaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_EmpleadoAmonestaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_EmpleadoAmonestaciones">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -951,8 +951,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoAmonestaciones' does no
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_EmpleadoIncapacidades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_EmpleadoIncapacidades">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -971,8 +971,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoIncapacidades' does not
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Empleados">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -989,8 +989,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Empleados' does not have a prim
           <Property Name="per_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialAmonestacion">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1018,8 +1018,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="hamo_UsuarioModifica" Type="int" />
           <Property Name="hamo_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialAudienciaDescargo">
           <Key>
             <PropertyRef Name="aude_Id" />
@@ -1048,8 +1048,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' doe
           <Property Name="aude_UsuarioModifica" Type="int" />
           <Property Name="aude_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialCargos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialCargos">
           <Key>
             <PropertyRef Name="hcar_Id" />
@@ -1067,8 +1067,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialCargos' does not have 
           <Property Name="Usuario Modifica" Type="varchar" MaxLength="100" />
           <Property Name="Fecha Modifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialContrataciones">
           <Key>
             <PropertyRef Name="Id" />
@@ -1093,8 +1093,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does n
           <Property Name="Usuario Modifica" Type="varchar" MaxLength="100" />
           <Property Name="Fecha Modifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialHorasTrabajadas">
           <Key>
             <PropertyRef Name="Id" />
@@ -1123,8 +1123,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
           <Property Name="Usuario Modifica" Type="varchar" MaxLength="100" />
           <Property Name="Fecha Modifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialIncapacidades">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1151,8 +1151,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_Estado" Type="bit" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialPermisos_Empleados">
           <Key>
             <PropertyRef Name="Id" />
@@ -1165,8 +1165,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' do
           <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="Edad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialSalidas_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialSalidas_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialSalidas_Empleados">
           <Key>
             <PropertyRef Name="Id" />
@@ -1179,8 +1179,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialSalidas_Empleados' doe
           <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="Edad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Historialvacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Historialvacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Historialvacaciones">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1189,7 +1189,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Historialvacaciones' does not h
             <PropertyRef Name="hvac_Id" />
             <PropertyRef Name="hvac_FechaInicio" />
             <PropertyRef Name="hvac_FechaFin" />
-            
             <PropertyRef Name="hvac_DiasPagados" />
             <PropertyRef Name="hvac_MesVacaciones" />
             <PropertyRef Name="hvac_AnioVacaciones" />
@@ -1203,7 +1202,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Historialvacaciones' does not h
           <Property Name="hvac_Id" Type="int" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
-          <Property Name="hvac_CantDias" Type="int" Nullable="false" />
+          <Property Name="hvac_CantDias" Type="int" />
           <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_AnioVacaciones" Type="int" Nullable="false" />
@@ -1214,8 +1213,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Historialvacaciones' does not h
           <Property Name="hvac_UsuarioModifica" Type="int" />
           <Property Name="hvac_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HorariosDetalles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HorariosDetalles">
           <Key>
             <PropertyRef Name="hor_Id" />
@@ -1237,8 +1236,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have
           <Property Name="hor_UsuarioModifica" Type="int" />
           <Property Name="hor_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HVacacionesEmpleados">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1259,8 +1258,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
           <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_SeleccionCandidatos">
           <Key>
             <PropertyRef Name="Id" />
@@ -1291,8 +1290,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not h
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="Razon_Inactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_Sueldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Sueldos">
           <Key>
             <PropertyRef Name="Id" />
@@ -1325,8 +1324,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbEmpleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbEmpleados">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -1366,8 +1365,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a pr
           <Property Name="emp_UsuarioModifica" Type="int" />
           <Property Name="emp_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbHistorialPermisos_completa">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -1426,8 +1425,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="hper_UsuarioModifica" Type="int" />
           <Property Name="hper_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbHistorialSalidas">
           <Key>
             <PropertyRef Name="hsal_Id" />
@@ -1452,8 +1451,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas' does not ha
           <Property Name="hsal_UsuarioModifica" Type="int" />
           <Property Name="hsal_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbHistorialSalidas_completa">
           <Key>
             <PropertyRef Name="rsal_Descripcion" />
@@ -1509,8 +1508,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' do
           <Property Name="hsal_UsuarioModifica" Type="int" />
           <Property Name="hsal_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbPersonas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbPersonas">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -1522,8 +1521,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Relacion" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbtiposalidas">
           <Key>
             <PropertyRef Name="tsal_Id" />
@@ -2464,31 +2463,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3958,6 +3933,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_Logo" Type="nvarchar" Mode="In" />
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -4107,6 +4083,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="hcar_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
           <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="emp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -5536,15 +5513,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
@@ -9972,6 +9941,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_Logo" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10954,6 +10924,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -11580,7 +11551,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hvac_Id" Type="Int32" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
+          <Property Name="hvac_CantDias" Type="Int32" />
           <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
           <Property Name="hvac_AnioVacaciones" Type="Int32" Nullable="false" />

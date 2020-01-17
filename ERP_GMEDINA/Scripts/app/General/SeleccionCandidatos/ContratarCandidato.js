@@ -81,8 +81,8 @@ $("#btnGuardar").click(function () {
 
     }
     if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
-        tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && emp_CuentaBancaria.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
-        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.suc_Cantidad != "" && tbRequisiciones.req_Id != null) {
+        tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && tbEmpleados.emp_Fechaingreso != "" &&
+        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
         data = JSON.stringify({
             tbSeleccionCandidatos: tbSeleccionCandidatos,
             tbEmpleados: tbEmpleados,
