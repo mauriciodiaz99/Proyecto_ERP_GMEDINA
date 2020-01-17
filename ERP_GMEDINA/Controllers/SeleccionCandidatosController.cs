@@ -63,7 +63,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.per_Id = new SelectList(personasddl, "per_Id", "per_descripcion");
             try
             {
-                ViewBag.req_Id = new SelectList(requisicionesddl.Where(x => Convert.ToInt32(x.req_Vacantes) == 2), "req_Id", "req_Descripcion");
+                ViewBag.req_Id = new SelectList(requisicionesddl.Where(x => Convert.ToInt32(x.req_Vacantes) > x.req_VacantesOcupadas), "req_Id", "req_Descripcion");
             }
             catch
             {
@@ -71,39 +71,44 @@ namespace ERP_GMEDINA.Controllers
             }
 
 
+            tbSeleccionCandidatos tbSeleccionCandidatos = new tbSeleccionCandidatos { scan_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            List<tbSeleccionCandidatos> tbSeleccionCandidatos = new List<tbSeleccionCandidatos> { };
+            try
+            {
+                return View(tbSeleccionCandidatos);
+            }
+            catch (Exception ex)
+            {
+
+                ex.Message.ToString();
+            }
             return View(tbSeleccionCandidatos);
         }
 
         public ActionResult llenarTabla()
         {
-
-
-
             try
             {
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var candidatos = db.V_SeleccionCandidatos
-                        .Select(
-                        t => new
-                        {
-                            per_Id = t.IdPersona,
-                            Id = t.Id,
-                            Identidad = t.Identidad,
-                            Nombre = t.Nombre,
-                            Fase = t.Fase,
-                            Plaza_Solicitada = t.Plaza_Solicitada,
-                            Fecha = t.Fecha,
-                            Estado = t.Estado
-                        }).Where(x => x.Estado).ToList();
-                    return Json(candidatos, JsonRequestBehavior.AllowGet);
-                }
+                var candidatos = db.V_SeleccionCandidatos
+                    .Select(
+                    t => new {
+                        per_Id = t.IdPersona,
+                        Id = t.Id,
+                        Identidad = t.Identidad,
+                        Nombre = t.Nombre,
+                        Fase = t.Fase,
+                        Plaza_Solicitada = t.Plaza_Solicitada,
+                        Fecha = t.Fecha,
+                        Estado = t.Estado
+                    }
+
+                    ).ToList();
+                return Json(candidatos, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception ex)
             {
-                return Json("-2", JsonRequestBehavior.AllowGet);
+                ex.ToString();
+                throw;
             }
         }
 
@@ -261,6 +266,31 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbSeleccionCandidatos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected tbPersonas IsNull(tbPersonas valor)
         {
             if (valor != null)
@@ -374,7 +404,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
@@ -385,7 +415,7 @@ namespace ERP_GMEDINA.Controllers
                         //Si el candidato ah sido empleado se recontratara
                         var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
-                        tbEmpleados.emp_CuentaBancaria, true, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
+                        tbEmpleados.emp_CuentaBancaria, true, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, 1, DateTime.Now);
 
                         foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {

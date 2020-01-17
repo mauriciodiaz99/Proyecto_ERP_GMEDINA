@@ -1,26 +1,46 @@
-﻿//LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
+﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+
+    llenarTabla();
+});
+var fill = 0;
+var id = 0;
+
+//LLENAR INDEX////////////////////////////////////////////////////////////////////////////////////////
 var scan_Id = 0;
 function llenarTabla() {
     _ajax(null,
        '/SeleccionCandidatos/llenarTabla',
        'POST',
-       function (Lista) {
-           tabla.clear();
-           tabla.draw();
-           $.each(Lista, function (index, value) {
-               tabla.row.add({
-                   ID: value.Id,
-                   Identidad: value.Identidad,
-                   Nombre: value.Nombre,
-                   Fase: value.Fase,
-                   Plaza_Solicitada: value.Plaza_Solicitada,
-                   Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
-                   per_Id: value.per_Id
-               });
-           });
-           tabla.draw();
-       });
+         function (Lista) {
+             tabla.clear().draw();
+             if (validarDT(Lista)) {
+                 return null;
+             }
+             $.each(Lista, function (index, value) {
+                 var Acciones = value.Estado == 1
+                   ?null:
+                   "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                   "</div>";
+                 if (value.Estado > fill) {
+                     tabla.row.add({
+                         ID: value.Id,
+                         "Número": value.Id,
+                         Identidad: value.Identidad,
+                         Nombre: value.Nombre,
+                         Fase: value.Fase,
+                         Plaza_Solicitada: value.Plaza_Solicitada,
+                         Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
+                         Estado: value.Estado ? "Activo" : "Inactivo",
+                         Acciones: Acciones,
+                         per_Id: value.per_Id
+                 }).draw();
+                 }
+             });       
+         });      
 }
+
 $(document).ready(function () {
     llenarTabla();
 });
@@ -244,11 +264,11 @@ $("#btnEditar").click(function () {
 
 //EMPLEADO 
 function CallContratar(btn) {
-    debugger
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var scan_Id = row.data().ID;
     var per_id = row.data().per_Id;
+    debugger
     var Identidad = row.data().Identidad;
     var Nombre = row.data().Nombre;
     sessionStorage.setItem("scan_Id", scan_Id);

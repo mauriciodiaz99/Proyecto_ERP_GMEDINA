@@ -1283,6 +1283,7 @@
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\EditRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
+    <Content Include="Scripts\app\General\SeleccionCandidatos\Admin.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\ContratarCandidato.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />

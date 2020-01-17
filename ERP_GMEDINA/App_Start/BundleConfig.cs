@@ -714,6 +714,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAudienciaDescargos").Include(
                "~/Scripts/app/General/HistorialAudiencias/IndexHistorialAudienciaDescargos.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
+          "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/SeleccionCandidatos/Admin").Include(
+            "~/Scripts/app/General/SeleccionCandidatos/Admin.js"));
+
+
+
+
             // dataTables
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSeleccionCandidatos").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
