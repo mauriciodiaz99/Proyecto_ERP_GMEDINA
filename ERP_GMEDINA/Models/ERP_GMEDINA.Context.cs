@@ -2840,15 +2840,11 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCargos_tbEmpleados_Select");
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Contratar_Result> UDP_RRHH_tbEmpleados_Contratar(Nullable<int> scan_Id, Nullable<int> per_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<int> req_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> emp_Fechaingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Contratar_Result> UDP_RRHH_tbEmpleados_Contratar(Nullable<int> scan_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<int> req_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> emp_Fechaingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
         {
             var scan_IdParameter = scan_Id.HasValue ?
                 new ObjectParameter("scan_Id", scan_Id) :
                 new ObjectParameter("scan_Id", typeof(int));
-    
-            var per_IdParameter = per_Id.HasValue ?
-                new ObjectParameter("per_Id", per_Id) :
-                new ObjectParameter("per_Id", typeof(int));
     
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -2906,18 +2902,14 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
                 new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Contratar_Result>("UDP_RRHH_tbEmpleados_Contratar", scan_IdParameter, per_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_CuentaBancariaParameter, emp_ReingresoParameter, req_IdParameter, tmon_IdParameter, sue_CantidadParameter, emp_FechaingresoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Contratar_Result>("UDP_RRHH_tbEmpleados_Contratar", scan_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_CuentaBancariaParameter, emp_ReingresoParameter, req_IdParameter, tmon_IdParameter, sue_CantidadParameter, emp_FechaingresoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Recontratar_Result> UDP_RRHH_tbEmpleados_Recontratar(Nullable<int> scan_Id, Nullable<int> per_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<int> req_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> emp_Fechareingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Recontratar_Result> UDP_RRHH_tbEmpleados_Recontratar(Nullable<int> scan_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<int> req_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> emp_Fechareingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
         {
             var scan_IdParameter = scan_Id.HasValue ?
                 new ObjectParameter("scan_Id", scan_Id) :
                 new ObjectParameter("scan_Id", typeof(int));
-    
-            var per_IdParameter = per_Id.HasValue ?
-                new ObjectParameter("per_Id", per_Id) :
-                new ObjectParameter("per_Id", typeof(int));
     
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -2975,7 +2967,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
                 new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Recontratar_Result>("UDP_RRHH_tbEmpleados_Recontratar", scan_IdParameter, per_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_CuentaBancariaParameter, emp_ReingresoParameter, req_IdParameter, tmon_IdParameter, sue_CantidadParameter, emp_FechareingresoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Recontratar_Result>("UDP_RRHH_tbEmpleados_Recontratar", scan_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_CuentaBancariaParameter, emp_ReingresoParameter, req_IdParameter, tmon_IdParameter, sue_CantidadParameter, emp_FechareingresoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbHorarios_Delete_Result> UDP_RRHH_tbHorarios_Delete(Nullable<int> hor_id, string hor_razonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)

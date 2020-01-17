@@ -353,7 +353,7 @@ namespace ERP_GMEDINA.Controllers
                     //Si el candidato nunca ah sido empleado se contratara
                     if (empleados.Count == 0)
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Contratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, false, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
                         foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
@@ -364,7 +364,7 @@ namespace ERP_GMEDINA.Controllers
                     else
                     {
                         //Si el candidato ah sido empleado se recontratara
-                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(tbSeleccionCandidatos.scan_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, true, tbRequisiciones.req_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
 
