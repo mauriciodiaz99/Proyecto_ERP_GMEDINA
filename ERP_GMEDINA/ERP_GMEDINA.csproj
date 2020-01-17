@@ -1259,6 +1259,7 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
+    <Content Include="Scripts\app\General\HistorialCargos\PromoverHistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
@@ -1990,6 +1991,8 @@
     <Content Include="Views\Sueldos\Create.cshtml" />
     <Content Include="Views\HistorialCargos\_Create.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
+    <Content Include="Views\HistorialCargos\Promover.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Contratar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

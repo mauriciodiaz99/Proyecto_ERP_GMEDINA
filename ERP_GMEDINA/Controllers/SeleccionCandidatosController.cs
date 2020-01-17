@@ -46,11 +46,29 @@ namespace ERP_GMEDINA.Controllers
             personasddl = personasddl.Except(candidatosddl).ToList();
             personasddl = personasddl.Except(empleadosddl).ToList();
 
+            var requisicionesddl = db.tbRequisiciones.Where(x => x.req_Estado)
+            .Select(
+            t => new
+            {
+                req_Id = t.req_Id,
+                req_descripcion = t.req_Descripcion,
+                req_Vacantes = t.req_Vacantes,
+                req_VacantesOcupadas = t.req_VacantesOcupadas
+            }).ToList();
+
+
 
             //CARGAR DDL DE SELECCION CANDIDATOS
             ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento.Where(x => x.fare_Estado), "fare_Id", "fare_Descripcion");
             ViewBag.per_Id = new SelectList(personasddl, "per_Id", "per_descripcion");
-            ViewBag.req_Id = new SelectList(db.tbRequisiciones.Where(x => x.req_Estado), "req_Id", "req_Descripcion");
+            try
+            {
+                ViewBag.req_Id = new SelectList(requisicionesddl.Where(x => Convert.ToInt32(x.req_Vacantes) == 2), "req_Id", "req_Descripcion");
+            }
+            catch
+            {
+                ViewBag.req_Id = new SelectList(db.tbRequisiciones.Where(x => x.req_Estado), "req_Id", "req_Descripcion");
+            }
 
 
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -317,6 +335,7 @@ namespace ERP_GMEDINA.Controllers
 
             Empleado.per_Id = candidatos.per_Id;
             //CARGAR DDL DE EMPLEADOS
+            ViewBag.car_Id = new SelectList(db.tbEmpleados.Where(x => x.emp_Estado), "emp_Id", "car_Descripcion");
             ViewBag.car_Id = new SelectList(db.tbCargos.Where(x => x.car_Estado), "car_Id", "car_Descripcion");
             ViewBag.area_Id = new SelectList(db.tbAreas.Where(x => x.area_Estado), "area_Id", "area_Descripcion");
             ViewBag.depto_Id = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado), "depto_Id", "depto_Descripcion");
