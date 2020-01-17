@@ -219,6 +219,7 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $('#ModalInhabilitar').modal('hide');
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
