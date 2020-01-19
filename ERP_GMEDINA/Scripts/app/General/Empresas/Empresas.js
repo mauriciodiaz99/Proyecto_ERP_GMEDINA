@@ -27,7 +27,8 @@ $("#empr_Logo").change(function () {
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
      var img = document.getElementById('img1');
      img.src = "";
-  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+     MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+     $("#ModalNuevo").data("res", false);
  } else {
   var formData = new FormData();
   formData.append('file', $('#empr_Logo')[0].files[0]);
@@ -47,6 +48,7 @@ $("#empr_Logo").change(function () {
             MsgError("Error", "Cambiar el nombre del archivo");
             var img = document.getElementById('img1');
             img.src = "";
+            $("#ModalNuevo").data("res", false);
      }
   $("#ModalNuevo").data("res", res);
  });
@@ -58,6 +60,7 @@ $("#UPempr_Logo").change(function () {
   var img = document.getElementById('img2');
   img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+  $("#ModalEditar").data("res", false);
  } else {
   var formData = new FormData();
   formData.append('file', $('#UPempr_Logo')[0].files[0]);
@@ -77,8 +80,9 @@ $("#UPempr_Logo").change(function () {
    MsgError("Error", "El archivo no es valido");
    var img = document.getElementById('img2');
    img.src = "";
+   $("#ModalEditar").data("res", false);
   }
-  $("#ModalNuevo").data("res", res);
+  $("#ModalEditar").data("res", res);
  });
  }
 });
@@ -107,6 +111,7 @@ function tablaEditar(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+       //$('#UPempr_Logo').val(obj.empr_Logo);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
@@ -120,10 +125,7 @@ function tablaDetalles(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
-       $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
-       $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
-       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+       var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
        //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
@@ -138,7 +140,7 @@ $("#btnAgregar").click(function () {
  $(modalnuevo).find("#empr_Nombre").val("");
  $(modalnuevo).find("#empr_Nombre").focus();
  $(modalnuevo).find("#empr_Logo").val(null);
- $("#ModalEditar").find("#img1")[0].src = obj.empr_Logo;
+ $("#ModalNuevo").find("#img1")[0].src = '';
 })
 
 $("#btnEditar").click(function () {
@@ -162,7 +164,8 @@ $("#btnInactivar").click(function () {
  $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 $("#FormNuevo").on("submit", function (event) {
-    if ($("#ModalNuevo").data("res")) {
+ var modalNuevo=$("#ModalNuevo").data("res");
+    if (modalNuevo=="true") {
         event.preventDefault();
         var data = $("#FormNuevo").serializeArray();
         data = serializar(data);
@@ -177,18 +180,20 @@ $("#FormNuevo").on("submit", function (event) {
                     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                     $('.modal-backdrop').remove();//eliminamos el
                 }else {
-                    MsgError("Error","Imagen Requerida");
+                 MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     } else {
-        MsgError("Error", "El archivo no es valido o el campo ya existe");
+     MsgError("Error", "Intente con otra imagen ó cambiar el nombre");
     }
 });
 
 $("#btnActualizar").click(function () {
  var data = $("#FormEditar").serializeArray();
+ var img2 = $("#img2")[0].src;
+ //var formEditar = $("#ModalEditar").data("res");
  data = serializar(data);
- if (data != null) {
+ if (data != null && img2 != "http://localhost:51144/Empresas") {
   data.empr_Id = id;
   data = JSON.stringify({ tbEmpresas: data });
   _ajax(data,
@@ -204,7 +209,7 @@ $("#btnActualizar").click(function () {
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "Intente con otra imagen ó cambiar el nombre");
  }
 });
 
