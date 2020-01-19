@@ -1184,8 +1184,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
-          <Property Name="hinc_FechaInicio" Type="date" />
-          <Property Name="hinc_FechaFin" Type="date" />
+          <Property Name="hinc_FechaInicio" Type="datetime" />
+          <Property Name="hinc_FechaFin" Type="datetime" />
           <Property Name="hinc_Estado" Type="bit" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -7326,8 +7326,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hinc_CentroMedico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Doctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
           <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -10854,12 +10854,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hor_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(String)">
-            <Parameter Name="hor_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
-            <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result)">
             <Parameter Name="hor_id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
@@ -10878,11 +10872,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Restore" ReturnType="Collection(Int32)">
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
-            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbJornadas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
@@ -11232,6 +11221,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_HVacacionesEmpleados" EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" />
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Restore_Result)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Restore_Result)">
+            <Parameter Name="hor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12541,6 +12541,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="AnnioIngreso" Type="Int32" />
           <Property Name="Annio" Type="Int32" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14675,7 +14681,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result">
@@ -14697,7 +14702,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result">
@@ -15088,6 +15092,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
