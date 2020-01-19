@@ -1,5 +1,7 @@
 ﻿var jor_Id = 0;
+var fill = 0;
 $(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 function llenarTabla() {
@@ -13,12 +15,24 @@ function llenarTabla() {
                return null;
            }
            $.each(Lista, function (index, value) {
+               var Acciones = value.jor_Estado == 1
+                    ? null : Admin ?
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                    "</div>":"";
+
+               if (value.jor_Estado > fill) {
                tabla.row.add({
                    ID: value.jor_Id,
-                   Jornada: value.jor_Descripcion
+                   "Número": value.jor_Id,
+                   Jornada: value.jor_Descripcion,
+                   Estado: value.jor_Estado ? "Activo" : "Inactivo",
+                   Acciones:Acciones
                });
+               }
            });
            tabla.draw();
+
        });
 }
 function tablaEditar(ID) {
@@ -49,11 +63,16 @@ function tablaDetalles(ID) {
             }
         });
 }
-function format(obj, jor_Id) {
+function format(obj, jor_Id, estado) {
+    var emerson = estado == 'Inactivo' ? '' : '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>';
     var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right">' +
-        '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>' +
+        emerson+
         '</div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
+        var Acciones = index.hor_Estado == 1
+            ? '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
+            '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' : Admin ?
+            "<div>" + "<a class='btn btn-primary btn-xs ' onclick='hablilitarhorario("+index.hor_Id+")' >Activar</a>" + "</div>" : "";
         div = div +
             '<div class="col-md-3">' +
               '<div class="panel panel-default">' +
@@ -65,8 +84,7 @@ function format(obj, jor_Id) {
                   '<br> Hora Fin: ' + index.hor_HoraFin +
                 '</div>' +
                 '<div class="modal-footer">' +
-                  '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
-                  '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                    Acciones +
                 '</div>' +
               '</div>' +
             '</div>'
@@ -83,15 +101,16 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().ID;
-        hola = row.data().hola;
+        data=row.data();
+        id = data.ID;
+        hola = data.hola;
         tr.addClass('loading');
         _ajax({ id: parseInt(id) },
             '/Jornadas/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    row.child(format(obj, id)).show();
+                    row.child(format(obj, id, data.Estado)).show();
                     tr.removeClass('loading');
                     tr.addClass('shown');
                 }

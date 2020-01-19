@@ -727,6 +727,9 @@
     <Compile Include="Models\UDP_RRHH_tbHorarios_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHorarios_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHorarios_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -752,6 +755,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbJornadas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbJornadas_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbJornadas_Update_Result.cs">
@@ -1353,6 +1359,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
+    <Content Include="Scripts\app\General\Jornadas\Admin.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
