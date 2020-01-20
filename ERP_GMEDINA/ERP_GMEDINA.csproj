@@ -279,6 +279,7 @@
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Helpers\Liquidacion.cs" />
+    <Compile Include="Helpers\Modulo.cs" />
     <Compile Include="Models\cAcumuladosISR.cs" />
     <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFP.cs" />
@@ -2897,6 +2898,7 @@
     <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
     <Content Include="Views\Menu\MenuPrincipal.cshtml" />
+    <Content Include="Views\Shared\_NavigationRRHH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2956,7 +2958,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51144</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

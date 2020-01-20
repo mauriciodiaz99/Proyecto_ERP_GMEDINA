@@ -14,7 +14,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
-            Session["sesionUsuario"] = sesionUsuario;			
+            Session["sesionUsuario"] = sesionUsuario;
+            //Session["sesionModulo"]	= 
             return View();
         }
         public ActionResult MenuPrincipal()
