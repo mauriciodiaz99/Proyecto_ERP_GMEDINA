@@ -1745,6 +1745,7 @@
     <Content Include="Content\img\mas.png" />
     <Content Include="Content\img\menos.png" />
     <Content Include="Content\img\pago.jpg" />
+    <Content Include="Content\img\payroll.jpg" />
     <Content Include="Content\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-indicator.css" />
     <Content Include="Content\plugins\blueimp\css\blueimp-gallery-video.css" />
@@ -2859,6 +2860,8 @@
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
+    <Content Include="Views\Menu\MenuPrincipal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
