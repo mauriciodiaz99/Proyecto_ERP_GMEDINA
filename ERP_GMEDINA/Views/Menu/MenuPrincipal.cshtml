@@ -38,18 +38,22 @@
                         <img src="~/Content/img/payroll.jpg" alt="dashboard" class="img-responsive animated fadeInUp" style="height:469px; width:626px; margin-top:40px; margin-bottom:40px;">
                     </div>
                     <div class="col-lg-3">
-                        <div onclick="Redirect();" class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:40px;">
-                            <div class="m-b-md">
-                                <i class="fa fa-users fa-4x"></i>
-                                <b><h2 class="m-xs">RECURSOS HUMANOS</h2></b>
+                        <a href="@Url.Action("Index","Inicio")">
+                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:40px;">
+                                <div class="m-b-md">
+                                    <i class="fa fa-users fa-4x"></i>
+                                    <b><h2 class="m-xs">RECURSOS HUMANOS</h2></b>
+                                </div>
                             </div>
-                        </div>
-                        <div onclick="Redirect();" class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:75px;">
-                            <div class="m-b-md">
-                                <i class="fa fa-money fa-4x"></i>
-                                <b><h1 class="m-xs">PLANILLA</h1></b>
+                        </a>
+                        <a href="@Url.Action("Index","Menu")">
+                            <div class="widget navy-bg p-lg text-center animated bounceIn" style="margin-top:75px;">
+                                <div class="m-b-md">
+                                    <i class="fa fa-money fa-4x"></i>
+                                    <b><h1 class="m-xs">PLANILLA</h1></b>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
