@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validaDescripcion" })
+                            @Html.ValidationMessageFor(model => model.insf_DescInstitucionFinanc, "", new { @class = "text-danger", @id = "validaDescripcion", @autocomplete = "off"})
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validaContacto" })
+                            @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @id = "validaContacto", @autocomplete = "off"})
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                             <label class="" id="AsteriscTel">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "1", @max = "999999999999999", @name = "phone", @id = "phone" } })
+                            @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" }, @name = "phone", @id = "phone", @inputmask = "'mask': '999 9999 9999'", @autocomplete = "off" })
                             @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validaTelefono" })
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <label class="" id="AsteriscCorre">*</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" }, @autocomplete = "off", @type = "email" })
                             @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", @id = "validaCorreo" })
                         </div>
                     </div>
