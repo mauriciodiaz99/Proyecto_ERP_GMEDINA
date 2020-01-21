@@ -16,9 +16,17 @@
             </div>
             <div class="ibox-content">
                 @{
-                    if (ViewBag.ReportViewer != null)
+                    if (ViewBag.ReportViewerIgresos != null)
                     {
-                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                        @Html.ReportViewer(ViewBag.ReportViewerIgresos as Microsoft.Reporting.WebForms.ReportViewer)
+                    }
+                }
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (ViewBag.ReportViewerDeducciones != null)
+                    {
+                        @Html.ReportViewer(ViewBag.ReportViewerDeducciones as Microsoft.Reporting.WebForms.ReportViewer)
                     }
                 }
             </div>

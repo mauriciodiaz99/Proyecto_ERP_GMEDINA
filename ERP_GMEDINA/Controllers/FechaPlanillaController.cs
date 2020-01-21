@@ -79,14 +79,28 @@ namespace ERP_GMEDINA.Controllers
             ComprobantePagoSessionViewModel sessionComprobantePago = Session["HistorialDePago"] as ComprobantePagoSessionViewModel;
 
             #region Configuracion de Reportes
-            ReportViewer reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-            reportViewer.SizeToReportContent = false;
-            reportViewer.Width = Unit.Pixel(1050);
-            reportViewer.Height = Unit.Pixel(500);
-            reportViewer.BackColor = System.Drawing.Color.White;
+            ReportViewer HistorialIngresos = new ReportViewer()
+            {
+                ProcessingMode = ProcessingMode.Local,
+                SizeToReportContent = false,
+                Width = Unit.Pixel(1050),
+                Height = Unit.Pixel(500),
+                BackColor = System.Drawing.Color.White
+            };
+
+            ReportViewer HistorialDeducciones = new ReportViewer
+            {
+                ProcessingMode = ProcessingMode.Local,
+                SizeToReportContent = false,
+                Width = Unit.Pixel(1050),
+                Height = Unit.Pixel(500),
+                BackColor = System.Drawing.Color.White
+            };
+
             var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
             SqlConnection conx = new SqlConnection(connectionString);
+
+
             #endregion
 
             if (sessionComprobantePago != null)
@@ -94,20 +108,38 @@ namespace ERP_GMEDINA.Controllers
                 int anio = sessionComprobantePago.Anio;
                 int planilla = sessionComprobantePago.Id;
 
-                //comando para el dataAdapter
-                SqlCommand command = new SqlCommand();
-                command.CommandText = "SELECT * FROM [Plani].[V_Plani_HistorialIngreso] WHERE emp_Id = @id AND cpla_IdPlanilla = @planilla AND YEAR(hipa_FechaPago) = @anio";
-
-                command.Parameters.AddWithValue("@id", SqlDbType.Int).Value = id;
-                command.Parameters.AddWithValue("@planilla", SqlDbType.Int).Value = planilla;
-                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
-                command.Connection = conx;
-                SqlDataAdapter adp = new SqlDataAdapter(command);
+                #region Historial de Ingresos
+                //comando para el Historial de ingresos
+                SqlCommand commandHistorialIngresos = new SqlCommand();
+                commandHistorialIngresos.CommandText = "SELECT * FROM [Plani].[V_Plani_HistorialIngreso] WHERE emp_Id = @id AND cpla_IdPlanilla = @planilla AND YEAR(hipa_FechaPago) = @anio";
+                commandHistorialIngresos.Parameters.AddWithValue("@id", SqlDbType.Int).Value = id;
+                commandHistorialIngresos.Parameters.AddWithValue("@planilla", SqlDbType.Int).Value = planilla;
+                commandHistorialIngresos.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                commandHistorialIngresos.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(commandHistorialIngresos);
                 //adp.Fill(ds, ds.V_Ingresos_RPT.TableName);
                 adp.Fill(ds, "V_Plani_HistorialIngreso");
-                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialIngresosRPT.rdlc";
-                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_Plani_HistorialIngreso"]));
-                ViewBag.ReportViewer = reportViewer;
+                HistorialIngresos.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialIngresos.rdlc";
+                HistorialIngresos.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialDeIngresos", ds.Tables["V_Plani_HistorialIngreso"]));
+                #endregion
+
+                #region Historial de Deducciones
+                //comando para el Historial de ingresos
+                SqlCommand commandHistoriaDeducciones = new SqlCommand();
+                commandHistoriaDeducciones.CommandText = "SELECT * FROM [Plani].[V_Plani_HistorialDeducciones] WHERE emp_Id = @id AND cpla_IdPlanilla = @planilla AND YEAR(hipa_FechaPago) = @anio";
+                commandHistoriaDeducciones.Parameters.AddWithValue("@id", SqlDbType.Int).Value = id;
+                commandHistoriaDeducciones.Parameters.AddWithValue("@planilla", SqlDbType.Int).Value = planilla;
+                commandHistoriaDeducciones.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                commandHistoriaDeducciones.Connection = conx;
+                SqlDataAdapter adp2 = new SqlDataAdapter(commandHistoriaDeducciones);
+                //adp.Fill(ds, ds.V_Ingresos_RPT.TableName);
+                adp2.Fill(ds, "V_Plani_HistorialDeducciones");
+                HistorialIngresos.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialDeduccionesRPT.rdlc";
+                HistorialIngresos.LocalReport.DataSources.Add(new ReportDataSource("DataSetHistorialDedducciones", ds.Tables["V_Plani_HistorialDeducciones"]));
+                #endregion
+
+                ViewBag.ReportViewerIgresos = HistorialIngresos;
+                ViewBag.ReportViewerDeducciones = HistorialDeducciones;
                 conx.Close();
             }
 
