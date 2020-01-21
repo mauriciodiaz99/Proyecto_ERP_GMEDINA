@@ -39,7 +39,6 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo Observaciones Requerido")]
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
-
         
         [Required(ErrorMessage = "Campo Cuota Requerido")]
         [DataType(DataType.Currency)]
