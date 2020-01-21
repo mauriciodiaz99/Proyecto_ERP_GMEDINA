@@ -24,7 +24,7 @@
                   <div class="form-group">
                           <div class="col-md-2">
                               @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @class = "control-label"})
-                              <label class="" id="AsteriscoDescripcion">*</label>
+                              <label id="AsteriscoDescripcion">*</label>
                           </div>
                           <div class="col-md-8">
                               @Html.EditorFor(model => model.insf_DescInstitucionFinanc, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
@@ -35,7 +35,7 @@
                   <div class="form-group">
                       <div class="col-md-2">
                           @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label " })
-                          <label class="" id="AsteriscoContacto">*</label>
+                          <label id="AsteriscoContacto">*</label>
                       </div>
                           <div class="col-md-8">
                               @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
@@ -46,10 +46,10 @@
                   <div class="form-group">
                       <div class="col-md-2">
                           @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label" })
-                          <label class="" id="AsteriscoTelefono">*</label>
+                          <label id="AsteriscoTelefono">*</label>
                       </div>
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" }, @autocomplete = "off", @name = "phone", @id = "phone", @inputmask = "'mask': '999 9999 9999'" })
+                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" }, @autocomplete = "off", @name = "phone", @id = "phone" })
                               @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validacionTelefono" })
                           </div>
                       </div>
@@ -57,7 +57,7 @@
                   <div class="form-group">
                       <div class="col-md-2">
                           @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label " })
-                          <label class="" id="AsteriscoCorreo">*</label>
+                          <label id="AsteriscoCorreo">*</label>
                       </div>
                           <div class="col-md-8">
                               @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control" }, @type = "email", @autocomplete = "off" })
@@ -78,4 +78,7 @@
     </div>
   </div>
 </div>
-<script src="~/Scripts/app/General/InstitucionesFinancieras.js"></script>
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/app/General/InstitucionesFinancieras")
+}

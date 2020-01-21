@@ -1,4 +1,16 @@
-﻿const btnAgregar = $('#btnAgregarInstFin'),
+﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+        success: function (data) {
+            callback(data);
+        }
+    });
+}
+
+const btnAgregar = $('#btnAgregarInstFin');
     DescInstFin = $('#insf_DescInstitucionFinanc'),
     Contac = $('#insf_Contacto'),
     Telef = $('#phone'),
@@ -90,7 +102,7 @@ function Validacion(
     Contact,
     Tel,
     Cor) {
-
+    debugger;
         var ExprPhone = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/);
         var ExprEmail = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
     var todoBien = true;
@@ -116,7 +128,7 @@ function Validacion(
     }
 
     // Telefono
-    if (Tel.val() != '' && ExprPhone.test(Tel.val())) {
+    if (Tel.val() != '' || ExprPhone.test(Tel.val())) {
         validaTelefono.hide();
         AsteriscTel.removeClass('text-danger');
     } else {
@@ -126,7 +138,7 @@ function Validacion(
     }
 
     // Correo
-    if (Cor.val() != '' && ExprEmail.test(Cor.val())) {
+    if (Cor.val() != '' || ExprEmail.test(Cor.val())) {
         AsteriscCorre.removeClass('text-danger');
         validaCorreo.hide();
     } else {
@@ -137,18 +149,6 @@ function Validacion(
     return todoBien;
 }
 
-
-//FUNCION GENERICA PARA REUTILIZAR AJAX
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
 
 // REGION DE VARIABLES
 var EliminarID = 0;
@@ -238,6 +238,7 @@ $(btnAgregar).click(function () {
     Corre
     )) {
         debugger;
+        console(data);
         var data = $("#frmCreateInstFin").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
