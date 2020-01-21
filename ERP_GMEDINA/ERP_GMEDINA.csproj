@@ -2910,7 +2910,8 @@
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
-    <Content Include="Views\FechaPlanilla\DetailsEmpleadoEncablezado.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeIngresos.cshtml" />
+    <Content Include="Views\FechaPlanilla\ReporteDeHistorialDeDeducciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
