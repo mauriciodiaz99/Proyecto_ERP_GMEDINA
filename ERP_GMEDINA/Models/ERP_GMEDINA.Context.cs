@@ -149,8 +149,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_Plani_DecimoTercer> V_Plani_DecimoTercer { get; set; }
         public virtual DbSet<V_Plani_DesplegableHistorialPlanilla> V_Plani_DesplegableHistorialPlanilla { get; set; }
         public virtual DbSet<V_Plani_EncabezadoHistorialPlanilla> V_Plani_EncabezadoHistorialPlanilla { get; set; }
-        public virtual DbSet<V_Plani_HistorialDeducciones> V_Plani_HistorialDeducciones { get; set; }
-        public virtual DbSet<V_Plani_HistorialIngreso> V_Plani_HistorialIngreso { get; set; }
         public virtual DbSet<V_Plani_Prueba> V_Plani_Prueba { get; set; }
         public virtual DbSet<V_Plani_TipoPlani> V_Plani_TipoPlani { get; set; }
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
@@ -193,7 +191,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RPT_HistorialIncapacidad> V_RPT_HistorialIncapacidad { get; set; }
         public virtual DbSet<V_RPT_HistorialPermisos> V_RPT_HistorialPermisos { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
-        public virtual DbSet<V_RPT_HistorialVacaciones> V_RPT_HistorialVacaciones { get; set; }
         public virtual DbSet<V_RPT_HorasTrabajadas> V_RPT_HorasTrabajadas { get; set; }
         public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
         public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
