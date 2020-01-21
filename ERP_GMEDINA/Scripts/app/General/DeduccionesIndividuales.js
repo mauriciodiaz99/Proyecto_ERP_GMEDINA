@@ -151,6 +151,7 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #ast3").css("color", "black");
     $("#Crear #ast4").css("color", "black");
     $("#Crear #ast5").css("color", "black");
+    $('#asteriscoNo4').css('color', 'black');
     $("#emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -250,15 +251,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
 
     //--
-    if (expr.test(dei_MontoInicial)) {
-        $("#Crear #validation3d").css("display", "none");
-        $("#Crear #ast3").css("color", "black");
-    }
-    else {
-        $("#Crear #validation3d").css("display", "");
-        $("#Crear #ast3").css("color", "red");
-        TOF = false;
-    }
+
     //////////////////////////////
     if (dei_MontoInicial == "" || dei_MontoInicial == null || dei_MontoInicial == undefined || dei_MontoInicial <= 0) {
         $("#Crear #validation3").css("display", "");
@@ -270,6 +263,15 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         $("#Crear #validation3").css("display", "none");
         $("#Crear #ast3").css("color", "black");
+        if (expr.test(dei_MontoInicial)) {
+            $("#Crear #validation3d").css("display", "none");
+            $("#Crear #ast3").css("color", "black");
+        }
+        else {
+            $("#Crear #validation3d").css("display", "");
+            $("#Crear #ast3").css("color", "red");
+            TOF = false;
+        }
         console.log("true");
     }
 
@@ -277,21 +279,21 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     if (dei_MontoRestante != 0) {
         $("#Crear #validation4").css("display", "none");
         $("#asteriscoNo4").css("color", "black");
-    }
-    else {
-        $("#Crear #validation4").css("display", "");
-        $("#Crear #validation4d").css("display", "none");
-        $("#asteriscoNo4").css("color", "red");
-        TOF = false;
-    }
 
-    if (expr.test(dei_MontoRestante)) {
-        $("#Crear #validation4d").css("display", "none");
-        $("#asteriscoNo4").css("color", "black");
+        if (expr.test(dei_MontoRestante)) {
+            $("#Crear #validation4d").css("display", "none");
+            $("#asteriscoNo4").css("color", "black");
+        }
+        else {
+            $("#Crear #validation4d").css("display", "");
+            $("#Crear #ast4").css("color", "red");
+            TOF = false;
+        }
     }
     else {
-        $("#Crear #validation4d").css("display", "");
-        $("#Crear #ast4").css("color", "red");
+        $("#Crear #validation4d").css("display", "none");
+        $("#Crear #validation4").css("display", "");
+        $("#asteriscoNo4").css("color", "red");
         TOF = false;
     }
 
@@ -310,23 +312,23 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
         $("#Crear #validation5").css("display", "none");
         $("#Crear #ast5").css("color", "black");
+        if (expr.test(dei_Cuota)) {
+            $("#Crear #validation5d").css("display", "none");
+            $("#Crear #ast5").css("color", "black");
+        }
+        else {
+            $("#Crear #validation5d").css("display", "");
+            $("#Crear #ast5").css("color", "red");
+            TOF = false;
+        }
     }
     else {
         $("#Crear #validation5").css("display", "");
         $("#Crear #validation5d").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
         $("#Crear #ast5").css("color", "red");
         TOF = false;
     }
-    if (expr.test(dei_Cuota)) {
-        $("#Crear #validation5d").css("display", "none");
-        $("#Crear #ast5").css("color", "black");
-    }
-    else {
-        $("#Crear #validation5d").css("display", "");
-        $("#Crear #ast5").css("color", "red");
-        TOF = false;
-    }
+
 
     if (TOF == true) {
         document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
@@ -434,6 +436,11 @@ $("#btnCerrarEditar").click(function () {
     $("#Editar #aste3").css("color", "black");
     $("#Editar #aste4").css("color", "black");
     $("#Editar #aste5").css("color", "black");
+    $("#Editar #1editaste").css("color", "black");
+    $("#Editar #2editaste").css("color", "black");
+    $("#Editar #3editaste").css("color", "black");
+    $("#Editar #4editaste").css("color", "black");
+    $("#Editar #5editaste").css("color", "black");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
