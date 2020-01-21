@@ -203,6 +203,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_Plani_HistorialDeducciones> V_Plani_HistorialDeducciones { get; set; }
         public virtual DbSet<V_Plani_HistorialIngreso> V_Plani_HistorialIngreso { get; set; }
         public virtual DbSet<V_RPT_HistorialVacaciones> V_RPT_HistorialVacaciones { get; set; }
+        public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
+        public virtual DbSet<V_RPT_HistorialAmonestaciones_Empleados> V_RPT_HistorialAmonestaciones_Empleados { get; set; }
+        public virtual DbSet<V_RPT_HistorialAudienciaDescargo_empleados> V_RPT_HistorialAudienciaDescargo_empleados { get; set; }
+        public virtual DbSet<V_RPT_HistorialSalidas> V_RPT_HistorialSalidas { get; set; }
+        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
