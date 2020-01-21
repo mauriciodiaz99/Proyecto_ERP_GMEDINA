@@ -13,12 +13,12 @@ var InactivarID = 0;
 
 //formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 // evitar postbacks
 $("#frmEditISR").submit(function (e) {
@@ -73,7 +73,7 @@ function cargarGridISR() {
                 ]);
             }
         }
-        });
+    });
     FullBody();
 }
 
@@ -98,7 +98,7 @@ $(document).on("click", "#btnAgregarISR", function () {
     //mostrar modal
     $('#Crear input[type=text], input[type=number]').val('');
     $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display', 'none');
-    $('#frmISRCreate .messageValidation').css('display', 'none');    
+    $('#frmISRCreate .messageValidation').css('display', 'none');
     $('#frmISRCreate .asterisco').removeClass('text-danger');
     $("#AgregarISR").modal({ backdrop: 'static', keyboard: false });
     //
@@ -150,7 +150,7 @@ $('#btnCreateISR').click(function () {
     }
 
     if (ModelState == true) {
-        $('#btnCreateISR').attr('disabled',true);
+        $('#btnCreateISR').attr('disabled', true);
         var data = $("#frmISRCreate").serializeArray();
         $.ajax({
             url: "/ISR/Create",
@@ -221,7 +221,7 @@ $('#frmISRCreate #tde_IdTipoDedu').on('change', function () {
     }
     else {
         $('#frmISRCreate #Asteriscotde_IdTipoDeduISR').addClass("text-danger");
-        $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display','');
+        $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display', '');
     }
 });
 
@@ -246,10 +246,35 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
 
 });
 
+$('#btnEditISR2').click(function () {
+    $('#btnEditISR2').attr('disabled', true);
+    var data = $("#frmEditISR").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/ISR/Edit",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se editó el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridISR();
+            $("#EditarISR").modal('hide');
+            $("#EditarISRConfirmacion").modal('hide');
 
-
-
-
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se editó de forma exitosa!',
+            });
+        }
+    });
+    $('#btnEditISR2').attr('disabled', false);
+});
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -271,8 +296,8 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
             if (data) {
                 $("#Editar #isr_Id").val(data.isr_Id);
                 $("#Editar #isr_RangoInicial").val((data.isr_RangoInicial % 1 == 0) ? data.isr_RangoInicial + ".00" : data.isr_RangoInicial);
-                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal); 
-                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje); 
+                $("#Editar #isr_RangoFinal").val((data.isr_RangoFinal % 1 == 0) ? data.isr_RangoFinal + ".00" : data.isr_RangoFinal);
+                $("#Editar #isr_Porcentaje").val((data.isr_Porcentaje % 1 == 0) ? data.isr_Porcentaje + ".00" : data.isr_Porcentaje);
                 $("#Editar #tde_IdTipoDedu").val(data.tde_IdTipoDedu);
                 $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
                 $(".rangoInicial").focus();
@@ -308,6 +333,7 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarISR").click(function () {
+    //Modal de confirmacion editar
     var rangoInicial = $("#Editar #isr_RangoInicial").val().trim();
     var rangoFinal = $("#Editar #isr_RangoFinal").val().trim();
     var tipoDeduccion = $("#Editar #tde_IdTipoDedu").val().trim();
@@ -337,7 +363,7 @@ $("#btnEditarISR").click(function () {
         $('#Editar #Asteriscotde_IdTipoDeduISREdit').addClass('text-danger');
     }
 
-    if (porcentaje == null || porcentaje == 0 || porcentaje == '' || porcentaje == undefined) {
+    if (porcentaje == null || porcentaje === 0 || porcentaje == '' || porcentaje == undefined) {
         ModelState = false;
         $("#Editar #Validation_PorcentajeEdit").css('display', '');
         $('#Editar #Asteriscoisr_PorcentajeISREdit').addClass('text-danger');
@@ -349,36 +375,16 @@ $("#btnEditarISR").click(function () {
         $('#PorcentajeAsterisco').addClass("text-danger");
     }
 
-    
+
     if (ModelState == true) {
-        $('#btnEditarISR').attr('disabled', true);
-        var data = $("#frmEditISR").serializeArray();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/ISR/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se editó el registro, contacte al administrador',
-                });
-            }
-            else {
-                cargarGridISR();
-                $("#EditarISR").modal('hide');
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            }
-        });
-        $('#btnEditarISR').attr('disabled', false);
+        $('#EditarISRConfirmacion').modal();
+        $("#EditarISR").modal('hide');
     }
 });
-
+$('#btnRegresarISR').click(function () {
+    $("#EditarISRConfirmacion").modal('hide');
+    $("#EditarISR").modal();
+});
 
 // validaciones AsteriscoRangoInicialISR
 $('#frmEditISR #isr_RangoInicial').keyup(function () {
@@ -395,7 +401,7 @@ $('#frmEditISR #isr_RangoInicial').keyup(function () {
 
 // validaciones AsteriscoRangoFinalISR
 $('#frmEditISR #isr_RangoFinal').keyup(function () {
-    
+
     if ($("#EditarISR #isr_RangoFinal").val().trim() != '') {
 
         $("#EditarISR #RangoFinalAsterisco").removeClass('text-danger');
@@ -498,7 +504,7 @@ $("#btnInactivarISR").click(function () {
         }
         else {
             $("#InactivarISR").modal('hide');
-            cargarGridISR();            
+            cargarGridISR();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
