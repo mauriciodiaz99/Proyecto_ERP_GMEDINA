@@ -156,8 +156,8 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cb_Monto").val("");
     $("#AgregarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -364,8 +364,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
 
 
                 $("#EditarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -398,8 +398,8 @@ $("#btnUpdateBonos").click(function () {
         document.getElementById("btnUpdateBonos2").disabled = false;
         $("#Editar #Validation_descipcion6").css("display", "none");
         $("#EditarEmpleadoBonosConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
         $("#Editar #AsteriscoMonto").removeClass("text-danger");       
 }
 });
@@ -409,7 +409,6 @@ $("#btnUpdateBonos2").click(function () {
         document.getElementById("btnUpdateBonos2").disabled = true;
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEmpleadoBonos").serializeArray();
-        console.log(data);
 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
@@ -498,7 +497,6 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                     //-----------------------------------------NO ENTRA EN ESTE each
                     $.each(data, function (i, iter) {
                         if (iter.Id == SelectedIdCatIngreso) {
-                            console.log(iter.Descripcion);
                             $("#Detalles #cin_IdIngreso").html(iter.Descripcion);
                         }
                     });
@@ -545,14 +543,13 @@ $(document).on("click", "#btnmodalInactivarEmpleadoBonos", function () {
     document.getElementById("btCerrarNo").disabled = false;
     $("#EditarEmpleadoBonos").modal('hide');
     $("#InactivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroBono").click(function () {
     document.getElementById("btnInactivarRegistroBono").disabled = true;
-    console.log(IDInactivar);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoBonos/Inactivar/" + IDInactivar,
@@ -622,8 +619,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnActivarEmpleadoBonos"
     document.getElementById("btnActivarRegistroBono").disabled = false;
     document.getElementById("btactivarNO").disabled = false;
     $("#ActivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO

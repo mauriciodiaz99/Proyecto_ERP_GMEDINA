@@ -52,7 +52,7 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
@@ -185,8 +185,8 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     $("#Crear #emp_Id").val("0");
     $("#ini_Motivo").val('');
     $("#ini_Monto").val('');
@@ -271,6 +271,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 $('#Crear #ini_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarIngresosIndividuales").modal('hide');
+                cargarGridDeducciones();
 
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -383,8 +384,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                         });
                     });
                 $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -436,8 +437,8 @@ $("#btnEditIngresoIndividual").click(function () {
     if (TOF) {
         $("#EditarIngresosIndividuales").modal('hide');
         $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-        $("html, body").css("overflow", "hidden");
-        $("html, body").css("overflow", "scroll");
+        
+        
         document.getElementById("btnEditIngresoIndividual2").disabled = false;
     }
 
@@ -449,15 +450,15 @@ $("#btnEditIngresoIndividual").click(function () {
 $(document).on("click", "#btnRegresar", function () {
     $("#EditarIngresosIndividualesConfirmacion").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnReg", function () {
     $("#EditarIngresosIndividualesConfirmacion").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 
@@ -577,8 +578,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
                         });
                     });
                 $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                
+                
             }
             else {
                 //Mensaje de error si no hay data
@@ -597,22 +598,22 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
 $(document).on("click", "#btnBack", function () {
     $("#InactivarIngresosIndividuales").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnBa", function () {
     $("#InactivarIngresosIndividuales").modal('hide');
     $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
 });
 
 $(document).on("click", "#btnInactivarIngresoIndividual", function () {
     $("#EditarIngresosIndividuales").modal('hide');
     $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    
+    
     document.getElementById("btnInactivarRegistroIngresoIndividual").disabled = false;
 });
 

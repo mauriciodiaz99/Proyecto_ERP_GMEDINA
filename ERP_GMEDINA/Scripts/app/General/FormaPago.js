@@ -92,11 +92,12 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
 
 //FUNCION: CREAR UN NUEVO REGISTRO
 $('#btnCrearFormaPago').click(function () {
-    document.getElementById("btnCrearFormaPago").disabled = true;
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
+        //BLOQUEAR EL BOTON
+        $("#btnCrearFormaPago").attr("disabled", true);
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
@@ -109,6 +110,8 @@ $('#btnCrearFormaPago').click(function () {
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
+                //DESBLOQUEAR EL BOTON
+                $("#btnCrearFormaPago").attr("disabled", false);
             }
             else {
                 $("#Crear #fpa_Descripcion").val();
@@ -124,8 +127,7 @@ $('#btnCrearFormaPago').click(function () {
         $("#AsteriscoFormaPago").removeClass("text-danger");
     }
     else {
-        $("#Crear #AsteriscoFormaPago").css("display", "");
-        // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+        //SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
         DataAnnotations(false);
         //CAMBIAR A COLOR ROJO EL ASTERISCO
         $("#AsteriscoFormaPago").addClass("text-danger");
@@ -205,7 +207,6 @@ $("#btnConfirmarEditar2").click(function () {
     if ($("#Editar #fpa_Descripcion").val() != "") {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditFormaPago").serializeArray();
-        console.log(data);
         $.ajax({
             url: "/FormaPago/Editar",
             method: "POST",
@@ -252,8 +253,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
-                console.log(data[0].fpa_Descripcion);
                 var FechaCrea = FechaFormato(data[0].fpa_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].fpa_FechaModifica);
                 $("#frmDetailFormaPago #fpa_Descripcion").html(data[0].fpa_Descripcion);
