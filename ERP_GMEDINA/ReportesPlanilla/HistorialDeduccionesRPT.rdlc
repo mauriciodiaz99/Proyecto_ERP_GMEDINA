@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>emp Id</Value>
+                              <Value>Id Empleado</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -73,7 +73,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>identidad Empleado</Value>
+                              <Value>Identidad Empleado</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -103,7 +103,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>nombre Empleado</Value>
+                              <Value>Nombre</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -133,7 +133,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>cde Descripcion Deduccion</Value>
+                              <Value>Deducción</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -163,7 +163,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hipa AFP</Value>
+                              <Value>AFP</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -193,7 +193,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hipa Total ISR</Value>
+                              <Value>Total ISR</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -223,7 +223,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hidp Total</Value>
+                              <Value>Historial de pago Total</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -288,7 +288,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!emp_Id.Value)</Value>
+                              <Value>=Fields!emp_Id.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -408,7 +408,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!hipa_AFP.Value)</Value>
+                              <Value>=Fields!hipa_AFP.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -438,7 +438,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!hipa_TotalISR.Value)</Value>
+                              <Value>=Fields!hipa_TotalISR.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -468,7 +468,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!hidp_Total.Value)</Value>
+                              <Value>=Fields!hidp_Total.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -498,7 +498,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!TotalDeducciones.Value)</Value>
+                              <Value>=Fields!TotalDeducciones.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>

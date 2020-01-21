@@ -37,7 +37,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>emp Id</Value>
+                              <Value>Id Empleado</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -67,7 +67,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>identidad Empleado</Value>
+                              <Value>Identidad</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -97,7 +97,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>nombre Empleado</Value>
+                              <Value>Nombre</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -127,7 +127,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>cin Descripcion Ingreso</Value>
+                              <Value>Ingreso</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -157,7 +157,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hipa Fecha Pago</Value>
+                              <Value>Fecha de Pago</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -187,7 +187,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hip Total Pagar</Value>
+                              <Value>Total a Pagar</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
