@@ -13,8 +13,8 @@
                 <div class="ibox-title">
                     <h5>Listado de Instituciones Financieras</h5>
                     <div class="ibox-tools">
-                        @Html.ActionLink("Cargar Planilla Deducción", "CargaDocumento", null, new { @class = "btn btn-primary btn-xs" })
-                        @Html.ActionLink("Registrar Institución Financiera", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                        <a href="@Url.Action("Create", "InstitucionesFinancieras")" class="btn btn-primary btn-xs pull-right">Registrar Institución Financiera</a>
+                        <a href="@Url.Action("CargaDocumento", "InstitucionesFinancieras")" class="btn btn-primary btn-xs pull-right">Cargar Planilla Deducción</a>
                     </div>
                 </div>
                 <div class="ibox-content">
