@@ -39,6 +39,7 @@ $('.cargarPlanilla').click(function () {
                 //Validar si se genera un error al cargar la data de la planilla especifica
                 $('#btnPlanilla').css('display', '');
                 $('#Cargando').css('display', 'none');
+                $("html, body").css("overflow", "auto");
                 $('#Modal').modal('hide');
                 iziToast.error({
                     title: 'Error',
@@ -102,6 +103,8 @@ $('#btnGenerarPlanilla').click(function () {
 
     if (ModelState) {
         $('#Modal').modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "auto");
         $('#ConfigurarGenerarPlanilla').modal('hide');
         $('#btnPlanilla').css('display', 'none');
         $('#Cargando').css('display', '');

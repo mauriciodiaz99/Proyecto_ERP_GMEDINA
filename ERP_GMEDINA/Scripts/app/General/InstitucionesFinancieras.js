@@ -182,7 +182,7 @@ function cargarGridINFS() {
                 //variable boton editar
                 var botonEditar = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" style="margin-left:3px;"  class="btn btn-default btn-xs">Editar</a>' : '';
                 //variable donde está el boton activar
-                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inctivar</button>' : '' : '';
+                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inactivar</button>' : '' : '';
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
@@ -335,12 +335,14 @@ var ID_in = 0;
 // INACTIVAR 
 $(document).on("click", "#btnModalInactivarINFS", function () {
     ID_in = $(this).data('id');
-    $("#frmInactivarINFS").modal();
+    document.getElementById("btnInactivarINFS").disabled = false;
+    $("#frmInactivarINFS").modal({ backdrop: 'static', keyboard: false });
 });
 
 $("#btnInactivarINFS").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA INACTIVACIóN
+    document.getElementById("btnInactivarINFS").disabled = true;
     $.ajax({
         url: "/InstitucionesFinancieras/Inactivar/" + ID_in,
         method: "POST"
@@ -371,11 +373,13 @@ $("#btnInactivarINFS").click(function () {
 var activarID = 0;
 $(document).on("click", "#btnModalActivarINFS", function () {
     activarID = $(this).data('id');
-    $("#frmActivarINFS").modal();
+    document.getElementById("btnActivarINFS").disabled = false;
+    $("#frmActivarINFS").modal({ backdrop: 'static', keyboard: false });
 });
 
 //activar ejecutar
 $("#btnActivarINFS").click(function () {
+    document.getElementById("btnActivarINFS").disabled = true;
     $.ajax({
         url: "/InstitucionesFinancieras/Activar/" + activarID,
         method: "POST",
