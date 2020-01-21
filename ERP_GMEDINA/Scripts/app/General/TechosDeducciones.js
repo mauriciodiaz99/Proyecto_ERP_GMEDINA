@@ -74,14 +74,12 @@ function cargarGridTechosDeducciones() {
 }
 //Reiniciar DataAnnotations cuando se cierra un modal 
 $("#btnCerrarCreateTechosDeducciones").click(function () {
-    $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "none");
-    $("#frmTechosDeduccionesCreate #Validation_Techo").css("display", "none");
-    $("#frmTechosDeduccionesCreate #Validation_PorcentajeColaboradores").css("display", "none");
-    $("#frmTechosDeduccionesCreate #Validation_PorcentajeEmpresa").css("display", "none");
+    $("html, body").css("overflow", "auto");
     $("#Crear .asterisco").removeClass("text-danger");
 });
 
 $("#btnCerrarEditar").click(function () {
+    $("html, body").css("overflow", "auto");
     $("#Editar #Validation_deduccionE").css("display", "none");
     $("#Editar #Validation_TechoE").css("display", "none");
     $("#Editar #Validation_PorcentajeColaboradoresE").css("display", "none");
@@ -91,6 +89,11 @@ $("#btnCerrarEditar").click(function () {
 
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarTechosDeducciones", function () {
+    $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_Techo").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_PorcentajeColaboradores").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_PorcentajeEmpresa").css("display", "none");
+    $('#btnCreateTechoDeducciones').attr('disabled', false);
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/TechosDeducciones/EditGetDDL",
@@ -109,20 +112,25 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $(".field-validation-error").css('display', 'none');
     $('#Crear input[type=text], input[type=number]').val('');
-    $("#AgregarTechosDeducciones").modal();
+    $("#AgregarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
 });
 
 
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateTechoDeducciones').click(function () {
-    var deduccion =  $("#Crear #cde_IdDeducciones").val();
+
+    $("html, body").css("overflow", "auto");
+    var deduccion = $("#Crear #cde_IdDeducciones").val();
     var techo = $("#Crear #tddu_Techo").val();
     var porcentajeColaborador = $("#Crear #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresa = $("#Crear #tddu_PorcentajeEmpresa").val();
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     if ($("#Crear #cde_IdDeducciones").val() != "0" & $("#Crear #tddu_Techo").val() != "" & $("#Crear #tddu_PorcentajeColaboradores").val() != "" & $("#Crear #tddu_PorcentajeEmpresa").val() != "") {
+
+        $('#btnCreateTechoDeducciones').attr('disabled', true);
         var data = $("#frmTechosDeduccionesCreate").serializeArray();
-        console.log(data);
         $.ajax({
             url: "/TechosDeducciones/Create",
             method: "POST",
@@ -146,8 +154,9 @@ $('#btnCreateTechoDeducciones').click(function () {
             }
         });
     }
-    //Validaciones Data Annotations + asteriscos
+        //Validaciones Data Annotations + asteriscos
     else {
+        $('#btnCreateTechoDeducciones').attr('disabled', false);
         if (deduccion == "0") {
             $("#Crear #Validation_deduccion").css("display", "block");
             $("#AsteriskDeduccion").addClass("text-danger");
@@ -223,7 +232,9 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                             $("#Editar #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#EditarTechosDeducciones").modal();
+                $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "auto");
             }
             else {
                 //Mensaje de error si no hay data
@@ -235,42 +246,25 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditarTecho").click(function () {
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    $("#EditarTechosDeducciones").modal('hide');
+    $("html, body").css("overflow", "auto");
+});
+
+$(document).on("click", "#btnEditarTecho", function () {
+    $('#btnConfirmarEditarTD').attr('disabled', false);
     var deduccionE = $("#Editar #cde_IdDeducciones").val();
     var techoE = $("#Editar #tddu_Techo").val();
     var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
     var porcentajeEmpresaE = $("#Editar #tddu_PorcentajeEmpresa").val();
+
     if ($("#Editar #cde_IdDeducciones").val() != "0" & $("#Editar #tddu_Techo").val() != "" & $("#Editar #tddu_PorcentajeColaboradores").val() != "" & $("#Editar #tddu_PorcentajeEmpresa").val() != "") {
-        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-        var data = $("#frmEditTechosDeducciones").serializeArray();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/TechosDeducciones/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se editó el registro, contacte al administrador',
-                });
-            }
-            else {
-                cargarGridTechosDeducciones();
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarTechosDeducciones").modal('hide');
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
-                });
-            }
-        });
-    }
-        //Validaciones Data Annotations + asteriscos
-    else {
+        $("#EditarTechosDeducciones").modal('hide');
+        $("#ConfirmarEdicionTD").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "auto");
+    } else {
         if (deduccionE == "0") {
             $("#Editar #Validation_deduccionE").css("display", "block");
             $("#Editar #AsteriskDeduccionE").addClass("text-danger");
@@ -306,18 +300,118 @@ $("#btnEditarTecho").click(function () {
     }
 });
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarTechosDeducciones").modal('hide');
+$("#btnCerrarConfirmarEditarTD").click(function () {
+    $("#ConfirmarEdicionTD").modal('hide');
+    $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnConfirmarEditarTD").click(function () {
+    $("html, body").css("overflow", "auto");
+    var deduccionE = $("#Editar #cde_IdDeducciones").val();
+    var techoE = $("#Editar #tddu_Techo").val();
+    var porcentajeColaboradorE = $("#Editar #tddu_PorcentajeColaboradores").val();
+    var porcentajeEmpresaE = $("#Editar #tddu_PorcentajeEmpresa").val();
+    if ($("#Editar #cde_IdDeducciones").val() != "0" & $("#Editar #tddu_Techo").val() != "" & $("#Editar #tddu_PorcentajeColaboradores").val() != "" & $("#Editar #tddu_PorcentajeEmpresa").val() != "") {
+
+        $('#btnConfirmarEditarTD').attr('disabled', true);
+        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+        var data = $("#frmEditTechosDeducciones").serializeArray();
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/TechosDeducciones/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+
+                $("#ConfirmarEdicionTD").modal('hide');
+                $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se editó el registro, contacte al administrador',
+                });
+            }
+            else {
+                cargarGridTechosDeducciones();
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#ConfirmarEdicionTD").modal('hide');
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro fue editado de forma exitosa!',
+                });
+            }
+        });
+    }
+        //Validaciones Data Annotations + asteriscos
+    else {
+        $('#btnConfirmarEditarTD').attr('disabled', false);
+        $("#ConfirmarEdicionTD").modal('hide');
+        $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+
+        if (deduccionE == "0") {
+            $("#Editar #Validation_deduccionE").css("display", "block");
+            $("#Editar #AsteriskDeduccionE").addClass("text-danger");
+        }
+        else {
+            $("#Editar #Validation_deduccionE").css("display", "none");
+            $("#Editar #AsteriskDeduccionE").removeClass("text-danger");
+        }
+        if (techoE == "") {
+            $("#Editar #Validation_TechoE").css("display", "block");
+            $("#Editar #AsteriskTechoE").addClass("text-danger");
+        }
+        else {
+            $("#Editar #Validation_TechoE").css("display", "none");
+            $("#Editar #AsteriskTechoE").removeClass("text-danger");
+        }
+        if (porcentajeColaboradorE == "") {
+            $("#Editar #Validation_PorcentajeColaboradoresE").css("display", "block");
+            $("#Editar #AsteriskPorcentajeColaboradorE").addClass("text-danger");
+        }
+        else {
+            $("#Editar #Validation_PorcentajeColaboradoresE").css("display", "none");
+            $("#Editar #AsteriskPorcentajeColaboradorE").removeClass("text-danger");
+        }
+        if (porcentajeEmpresaE == "") {
+            $("#Editar #Validation_PorcentajeEmpresaE").css("display", "block");
+            $("#Editar #AsteriskPorcentajeEmpresaE").addClass("text-danger");
+        }
+        else {
+            $("#Editar #Validation_PorcentajeEmpresaE").css("display", "none");
+            $("#Editar #AsteriskPorcentajeEmpresaE").removeClass("text-danger");
+        }
+    }
 });
 
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
+    $('#btnInactivarTechosDeducciones').attr('disabled', false);
     $("#EditarTechosDeducciones").modal('hide');
-    $("#InactivarTechosDeducciones").modal();
+    $("#InactivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
+});
+
+
+$("#btnCerrarInactivarTechosDeducciones").click(function () {
+    $("#InactivarTechosDeducciones").modal('hide');
+    $("#EditarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
+});
+
+$("#btnCerrarDetail").click(function () {
+    $("html, body").css("overflow", "auto");
 });
 
 //Inactivar registro Techos Deducciones
 $("#btnInactivarTechosDeducciones").click(function () {
+    $('#btnInactivarTechosDeducciones').attr('disabled', true);
+    $("html, body").css("overflow", "auto");
     var data = $("#frmInactivarTechosDeducciones").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -394,7 +488,9 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 //        });
                 //    });
-                $("#DetailsTechosDeducciones").modal();
+                $("#DetailsTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "auto");
             }
             else {
                 //Mensaje de error si no hay data
@@ -409,12 +505,22 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
 // activar
 var activarID = 0;
 $(document).on("click", "#btnActivarTechosDeducciones", function () {
+    $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', false);
     activarID = $(this).data('id');
-    $("#ActivarTechosDeducciones").modal();
+    $("#ActivarTechosDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "auto");
+});
+
+$("#btnCerrarActivarTechosDeduccionesEjecutar").click(function () {
+    $("#ActivarTechosDeducciones").modal('hide');
+    $("html, body").css("overflow", "auto");
 });
 
 //activar ejecutar
 $("#btnActivarTechosDeduccionesEjecutar").click(function () {
+    $('#btnActivarTechosDeduccionesEjecutar').attr('disabled', true);
+    $("html, body").css("overflow", "auto");
 
     $.ajax({
         url: "/TechosDeducciones/Activar/" + activarID,
