@@ -708,7 +708,7 @@ function listarCatalogos() {
 			],
 			"order": [[1, "asc"]],
 			initComplete: function (settings, json) {
-			
+
 				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
@@ -1259,6 +1259,7 @@ $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 		'/CatalogoDePlanillas/ActivarPlanilla',
 		'POST',
 		(data) => {
+			console.log(data);
 			if (data.response == 'bien') {
 				iziToast.success({
 					title: 'Éxito',

@@ -9,6 +9,15 @@ namespace ERP_GMEDINA
         public static void RegisterBundles(BundleCollection bundles)
         {
             #region Plantilla
+            // iziToast JS
+            bundles.Add(new ScriptBundle("~/plugins/izitoast").Include(
+                        "~/Scripts/plugins/iziToast/iziToast.js",
+                        "~/Scripts/plugins/iziToast/iziToast.min.js"));
+            //iziToast CSS
+            // Touch Spin Styless
+            bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
+                      "~/Content/plugins/izitoast/iziToast.css",
+                      "~/Content/plugins/izitoast/iziToast.min.css"));
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
