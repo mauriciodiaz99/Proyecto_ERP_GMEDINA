@@ -463,4 +463,3 @@ $("#btnActivarRegistroTipoDeducciones").click(function () {
         });
     });
 });
-
