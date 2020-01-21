@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "El campo descripción no puede quedar vacío")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "La descripcion debe contener al menos tres caracteres.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "La descripcion debe contener un minimo de tres caracteres y un máximo de 16.")]
         public string tde_Descripcion { get; set; }
 
         [Display(Name = "Usuario Crea")]
