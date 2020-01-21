@@ -18,8 +18,11 @@ const btnAgregar = $('#btnAgregar'),
     validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
     validacionMontoInicial = $('#validacionMontoInicial'),
     validacionMontoRestante = $('#validacionMontoRestante'),
+    validacionMontoInicial2 = $('#validacionMontoInicial2'),
+    validacionMontoRestante2 = $('#validacionMontoRestante2'),
     validacionObservaciones = $('#validacionObservaciones'),
     validacionIdDeducciones = $('#validacionIdDeducciones'),
+    validacionCuota2 = $('#validacionCuota2'),
     validacionCuota = $('#validacionCuota');
 
     ;
@@ -36,8 +39,11 @@ asteriscCuota = $('#asteriscCuota'),
 validnEquipoEmpleado = $('#validEquipoEmpleado'),
 validMontoInicial = $('#validMontoInicial'),
 validMontoRestante = $('#validMontoRestante'),
+validMontoInicial2 = $('#validMontoInicial2'),
+validMontoRestante2 = $('#validMontoRestante2'),
 validObservaciones = $('#validObservaciones'),
 validCuota = $('#validCuota'),
+validCuota2 = $('#validCuota2'),
 MontoRestanteEditar = $('#MontoRestanteEditar');
 
 
@@ -259,7 +265,7 @@ function validaciones(equipoEmpId,
     }
 
     // Monto inicial
-    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
+    if (montoInicial.val() != '') {
         asteriscoMontoInicial.removeClass('text-danger');
         validacionMontoInicial.hide();
 
@@ -269,26 +275,40 @@ function validaciones(equipoEmpId,
         }
         else {
             asteriscoMontoInicial.addClass('text-danger');
-        validacionMontoInicial.show();
-        todoBien = false;
+            validacionMontoInicial.show();
+            validacionMontoInicial2.hide();
+            todoBien = false;
         }
     } else {
         asteriscoMontoInicial.addClass('text-danger');
         validacionMontoInicial.show();
+        validacionMontoInicial2.hide();
+        todoBien = false;
+    }
+
+    if (expreg.test(montoInicial.val())) {
+        asteriscoMontoInicial.removeClass('text-danger');
+        validacionMontoInicial2.hide();
+    }
+    else {
+        asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial2.show();
         todoBien = false;
     }
 
     // Monto Restante
-    if (montoRestante.val() != '' && expreg.test(montoRestante.val())) {
+    if (montoRestante.val() != '') {
         asteriscoMontoRestante.removeClass('text-danger');
         validacionMontoRestante.hide();
     } else {
         asteriscoMontoRestante.addClass('text-danger');
         validacionMontoRestante.show();
+        validacionMontoRestante2.hide();
         todoBien = false;
 
         if (montoRestante.val() > montoInicial.val()) {
             asteriscoMontoRestante.addClass('text-danger');
+            validacionMontoRestante2.hide();
             MontoRestanteCrear.show();
             todoBien = false;
         }
@@ -297,6 +317,16 @@ function validaciones(equipoEmpId,
             MontoRestanteCrear.hide();
             todoBien = false;
         }
+    }
+
+    if (expreg.test(montoRestante.val())) {
+        asteriscoMontoRestante.removeClass('text-danger');
+        validacionMontoRestante2.hide();
+    }
+    else {
+        asteriscoMontoRestante.addClass('text-danger');
+        validacionMontoRestante2.show();
+        todoBien = false;
     }
 
     // Observaciones
@@ -326,8 +356,20 @@ function validaciones(equipoEmpId,
     } else {
         asteriscoCuota.addClass('text-danger');
         validacionCuota.show();
+        validacionCuota2.hide();
         todoBien = false;
     }
+    
+    if (expreg.test(cuota.val())) {
+        asteriscoCuota.removeClass('text-danger');
+        validacionCuota2.hide();
+    }
+    else {
+        asteriscoCuota.addClass('text-danger');
+        validacionCuota2.show();
+        todoBien = false;
+    }
+
     return todoBien;
 }
 
@@ -402,28 +444,40 @@ function validacionEditar(
 
 
     // Monto inicial
-    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
+    if (MontoInicial.val() != '') {
         asteriscMontoInicial.removeClass('text-danger');
         validMontoInicial.hide();
 
-        if (montoInicial.val() != 0 || montoInicial.val() != 0.00) {
+        if (MontoInicial.val() != 0 || MontoInicial.val() != 0.00) {
             asteriscMontoInicial.removeClass('text-danger');
             validMontoInicial.hide();
         }
         else {
             asteriscMontoInicial.addClass('text-danger');
             validMontoInicial.show();
+            validMontoInicial2.hide();
             todoBien = false;
         }
     } else {
         asteriscMontoInicial.addClass('text-danger');
         validMontoInicial.show();
+        validMontoInicial2.hide();
+        todoBien = false;
+    }
+
+    if (expreg.test(MontoInicial.val())) {
+        asteriscMontoInicial.removeClass('text-danger');
+        validMontoInicial2.hide();
+    }
+    else {
+        asteriscMontoInicial.addClass('text-danger');
+        validMontoInicial2.show();
         todoBien = false;
     }
 
     // Monto Restante
 
-    if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
+    if (MontoRestante.val() != '') {
         asteriscMontoRestante.removeClass('text-danger');
         validMontoRestante.hide();
         if (MontoRestante.val() < MontoInicial.val()) {
@@ -433,17 +487,26 @@ function validacionEditar(
         else {
             asteriscMontoRestante.addClass('text-danger');
             MontoRestanteEditar.show();
+            validMontoRestante2.hide();
             todoCorrecto = false;
         }
 
     } else {
         asteriscMontoRestante.addClass('text-danger');
         validMontoRestante.show();
+        validMontoRestante2.hide();
         todoCorrecto = false;
-
     }
 
-
+    if (expreg.test(MontoRestante.val())) {
+        asteriscMontoRestante.removeClass('text-danger');
+        validMontoRestante2.hide();
+    }
+    else{
+        asteriscMontoRestante.addClass('text-danger');
+        validMontoRestante2.show();
+        todoCorrecto = false;
+    }
 
     // Observaciones
     if (Observaciones.val() != '') {
@@ -462,8 +525,20 @@ function validacionEditar(
     } else {
         asteriscCuota.addClass('text-danger');
         validCuota.show();
+        validCuota2.hide();
         todoCorrecto = false;
     }
+
+    if (expreg.test(Cuota.val())) {
+        asteriscCuota.removeClass('text-danger');
+        validCuota2.hide();
+    }
+    else {
+        asteriscCuota.addClass('text-danger');
+        validCuota2.show();
+        todoCorrecto = false;
+    }
+
     return todoCorrecto;
 }
 
