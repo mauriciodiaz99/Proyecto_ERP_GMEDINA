@@ -49,7 +49,7 @@
                           <label class="" id="AsteriscoTelefono">*</label>
                       </div>
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" }, @autocomplete = "off", @name = "phone", @id = "phone", @inputmask = "'mask': '999 9999 9999'" } })
+                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control" }, @autocomplete = "off", @name = "phone", @id = "phone", @inputmask = "'mask': '999 9999 9999'" })
                               @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validacionTelefono" })
                           </div>
                       </div>
@@ -78,12 +78,4 @@
     </div>
   </div>
 </div>
-
-@*<script>
-    $(phone).mask("(999) 9999-9999");
-</script>*@
-
-@section Scripts
-{
-    @Scripts.Render("~/Scripts/app/General/InstitucionesFinancieras")
-}
+<script src="~/Scripts/app/General/InstitucionesFinancieras.js"></script>
