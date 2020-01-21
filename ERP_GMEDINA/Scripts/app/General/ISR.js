@@ -150,6 +150,7 @@ $('#btnCreateISR').click(function () {
     }
 
     if (ModelState == true) {
+        debugger;
         $('#btnCreateISR').attr('disabled', true);
         var data = $("#frmISRCreate").serializeArray();
         $.ajax({
@@ -247,6 +248,7 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
 });
 
 $('#btnEditISR2').click(function () {
+    debugger;
     $('#btnEditISR2').attr('disabled', true);
     var data = $("#frmEditISR").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
