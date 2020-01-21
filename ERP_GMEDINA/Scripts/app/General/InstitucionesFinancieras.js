@@ -91,6 +91,8 @@ function Validacion(
     Tel,
     Cor) {
 
+        var ExprPhone = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/);
+        var ExprEmail = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
     var todoBien = true;
 
     // Descripción Institución Financiera
@@ -114,7 +116,7 @@ function Validacion(
     }
 
     // Telefono
-    if (Tel.val() != '') {
+    if (Tel.val() != '' && ExprPhone.test(Tel.val())) {
         validaTelefono.hide();
         AsteriscTel.removeClass('text-danger');
     } else {
@@ -124,7 +126,7 @@ function Validacion(
     }
 
     // Correo
-    if (Cor.val() != '') {
+    if (Cor.val() != '' && ExprEmail.test(Cor.val())) {
         AsteriscCorre.removeClass('text-danger');
         validaCorreo.hide();
     } else {
@@ -184,7 +186,7 @@ function cargarGridINFS() {
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
-                $('#tblFormaPago').dataTable().fnAddData([
+                $('#IndexTable').dataTable().fnAddData([
                 ListaINFS[i].insf_IdInstitucionFinanciera,
                 ListaINFS[i].insf_DescInstitucionFinanc,
                 ListaINFS[i].insf_Contacto,
